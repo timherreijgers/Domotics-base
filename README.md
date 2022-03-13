@@ -1,0 +1,1 @@
+echo "# Domotics-base" 
