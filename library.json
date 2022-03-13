@@ -1,0 +1,33 @@
+{
+	"name": "DomoticsBase",
+	"version": "0.1.0",
+	"description": "Library containing common code for Domotics projects",
+	"authors":
+	[
+		{
+			"name": "Tim Herreijgers",
+			"email": "timtim3001@gmail.com",
+			"maintainer": true
+		}
+	],
+	"dependencies": [
+		{
+			"owner":"bportaluri",
+			"name":"WiFiEsp",
+			"version":"^2.2.2"
+		},
+		{
+			"owner":"knolleary",
+			"name":"PubSubClient",
+			"version":"^2.8"
+		},
+		{
+			"owner":"jandrassy",
+			"name":"EthernetENC",
+			"version":"^2.0.2"
+		}
+		
+	],
+	"frameworks": "arduino",
+	"platforms": "atmelavr"
+}
