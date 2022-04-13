@@ -48,6 +48,7 @@ bool Mqtt::loop()
 {
 	if(!m_mqttClient.connected())
 	{
+		DEBUG_PRINT("Not connected, error code: ");
 		DEBUG_PRINTLN(m_mqttClient.state());
 		m_mqttClient.connect(m_name);
 	}
