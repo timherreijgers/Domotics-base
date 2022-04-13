@@ -1,6 +1,10 @@
 #ifndef __MQTT_WIFI_H__
 #define __MQTT_WIFI_H__
 
+#ifndef DOMOTICS_DEBUG_LOG_ENABLED
+#define _ESPLOGLEVEL_ 0
+#endif
+
 #include <Arduino.h>
 #include <WiFiEspClient.h>
 
