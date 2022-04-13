@@ -25,6 +25,9 @@
 			"owner":"jandrassy",
 			"name":"EthernetENC",
 			"version":"^2.0.2"
+		},
+		{
+			"name":"SPI"
 		}
 		
 	],
