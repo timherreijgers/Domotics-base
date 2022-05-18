@@ -1,6 +1,8 @@
 #ifndef __DOMOTICS_UTILS_COMPILE_TIME_CHECKS_H__
 #define __DOMOTICS_UTILS_COMPILE_TIME_CHECKS_H__
 
+namespace Utils
+{
 namespace CompileTimeChecks
 {
     template<class T, class U>
@@ -12,6 +14,7 @@ namespace CompileTimeChecks
     struct is_same<T, T> {
         enum { value = 1 };
     };
+}
 }
 
 #endif
