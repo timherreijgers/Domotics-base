@@ -7,6 +7,9 @@
 
 #include "mqtt.h"
 
+/**
+ * MQTT Ethernet driver
+ */
 class MqttEthernet : public Mqtt
 {
 public:
