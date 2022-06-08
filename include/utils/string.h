@@ -3,21 +3,52 @@
 
 #include "compile_time_checks.h"
 
+/**
+ * Namespace containing all utility functions/classes
+ */
 namespace Utils
 {
 	template<typename Arg>
-	void appendStrings(char * buffer, Arg arg)
+	void appendStringsUnsafe(char * buffer, Arg arg)
 	{
 		static_assert(CompileTimeChecks::is_same<Arg, const char *>::value, "The input for appendStrToBuffer can only be a string literal");
 		strcat(buffer, (const char *) arg);
 	}
 
+	/**
+	 * \brief Appends multiple string into the buffer. 
+	 * 
+	 * Appends multiple C-style string into the provided buffer. The user is responsible for making sure the buffer is cleared before appending. 
+	 * This variant of the function will not check whether the string will fit into the buffer, for this see ::appendStrings()
+	 */
 	template<typename Arg, typename... Args>
-	void appendStrings(char * buffer, Arg arg, Args... args)
+	void appendStringsUnsafe(char * buffer, Arg arg, Args... args)
 	{
 		static_assert(CompileTimeChecks::is_same<Arg, const char *>::value,  "The input for appendStrToBuffer can only be a string literal");
 		strcat(buffer, (const char *) arg);
-		appendStrings(buffer, args...);
+		appendStringsUnsafe(buffer, args...);
+	}
+
+	template<typename Arg>
+	bool appendStrings(char * buffer, size_t size, Arg arg)
+	{
+		static_assert(CompileTimeChecks::is_same<Arg, const char *>::value, "The input for appendStrToBuffer can only be a string literal");
+		strcat(buffer, (const char *) arg);
+		return true;
+	}
+
+	/**
+	 * \brief Appends multiple string into the buffer. 
+	 * 
+	 * Appends multiple C-style string into the provided buffer. The user is responsible for making sure the buffer is cleared before appending. 
+	 * This variant will return whether the appending has finished succesfully. 
+	 */
+	template<typename Arg, typename... Args>
+	bool appendStrings(char * buffer, size_t size, Arg arg, Args... args)
+	{
+		static_assert(CompileTimeChecks::is_same<Arg, const char *>::value,  "The input for appendStrToBuffer can only be a string literal");
+		strcat(buffer, (const char *) arg);
+		return appendStringsUnsafe(buffer, args...);
 	}
 }
 #endif
