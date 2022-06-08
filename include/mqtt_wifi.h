@@ -10,7 +10,9 @@
 
 #include "mqtt.h"
 
-//TODO: Add callback to get updates about current state to drive something like LEDs
+/**
+ * MQTT WiFi driver
+ */
 class MqttWifi : public Mqtt
 {
 public:
