@@ -1,5 +1,5 @@
 *.tar.gz
 html
 .idea
-cmake*
+cmake-*
 build
