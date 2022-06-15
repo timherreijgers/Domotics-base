@@ -1,12 +1,12 @@
-#include "mqtt_wifi.h"
+#include "mqtt_esp8266_wifi.h"
 #include "domotics_debug.h"
 #include "WiFiEsp.h"
 
-MqttWifi::MqttWifi(const char *name, Stream *wifiStream, const char *ssid, const char *password): Mqtt(name, _wifiClient), _ssid(ssid), _password(password), _stream(wifiStream)
+MqttEsp8266Wifi::MqttEsp8266Wifi(const char *name, Stream *wifiStream, const char *ssid, const char *password): Mqtt(name, _wifiClient), _ssid(ssid), _password(password), _stream(wifiStream)
 {
 }
 
-bool MqttWifi::connect(const IPAddress &brokerIp)
+bool MqttEsp8266Wifi::connect(const IPAddress &brokerIp)
 {
 	WiFi.init(_stream);
 

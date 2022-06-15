@@ -25,8 +25,13 @@ void mqttMessageReceived(const char *topic, const uint8_t *payload, uint32_t len
 /**
  * \brief Base class for MQTT communication
  * 
- * This class provides the base functionality to enable MQTT communication. This class contains all logic to do with MQTT. 
- * All connection logic is contained within the \ref MqttEthernet and \ref MqttWifi classes. To enable more ways to communicate
+ * This class provides the base functionality to enable MQTT communication and contains all logic to do with MQTT.
+ * All connection logic is contained within the \ref MqttEthernet and \ref MqttEsp8266Wifi classes. One of these classes should
+ * be used, depending on the hardware used. To actually send/receive messages, as well as keeping the connection alive, the 
+ * Mqtt::poll() methods should be called periodically 
+ * 
+ * 
+ * To enable more ways to communicate
  * with connection hardware, for example a different ethernet controller, this class can be extended. The hardware abstraction should
  * provide a <a href="https://www.arduino.cc/reference/en/libraries/wifi/">Client</a>. This Client is used as an interface between 
  * the hardware and the MQTT middleware. This Client has to be passed to the Mqtt::Mqtt(const char *, Client &) constructor.
@@ -35,7 +40,6 @@ void mqttMessageReceived(const char *topic, const uint8_t *payload, uint32_t len
  * broker using the chosen hardware, after which it should call Mqtt::connectToBroker(const IPAddress &)to let the base class
  * establish the actual connection to the broker. 
  * 
- * // TODO: Explain how to use this class -> poll
  */
 class Mqtt
 {
@@ -93,7 +97,14 @@ protected:
 	bool connectToBroker(const IPAddress &brokerIp);
 
 	/**
-	 * Mqtt constructor. 
+	 * Mqtt constructor initializing the mqtt middleware. It takes the name which is required for the mqtt broker, as well as
+	 * a reference to the client to read and write data to and from the hardware. Most hardware libraries (like for a library for a
+	 * specific ethernet module) will provide this client, given it's created for the Arduino ecosystem. 
+	 * 
+	 * \note The client must not go out of scope, as a reference to this client is saved in the utilized mqtt library. 
+	 * 
+	 * \param name Name of the device
+	 * \param client The client 
 	 */
     Mqtt(const char *name, Client &client);
 private:

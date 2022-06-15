@@ -4,13 +4,13 @@
 
 #include "domotics_debug.h"
 
-MqttEthernet::MqttEthernet(const char *name, uint8_t mac[6], int slaveSelectPin): Mqtt(name, _ethClient)
+MqttEnc28J60Ethernet::MqttEnc28J60Ethernet(const char *name, uint8_t mac[6], int slaveSelectPin): Mqtt(name, _ethClient)
 {
 	memcpy(_mac, mac, 6);
 	Ethernet.init(slaveSelectPin);
 }
 
-bool MqttEthernet::connect(const IPAddress &brokerIp)
+bool MqttEnc28J60Ethernet::connect(const IPAddress &brokerIp)
 {
 	Ethernet.begin(_mac);
 
