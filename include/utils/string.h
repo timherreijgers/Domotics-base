@@ -2,6 +2,7 @@
 #define __DOMOTICS_UTILS_STRING_H__
 
 #include <inttypes.h>
+#include <string.h>
 
 #include "compile_time_checks.h"
 
@@ -36,6 +37,11 @@ namespace Utils
 	bool appendStrings(char * buffer, size_t size, Arg arg)
 	{
 		static_assert(CompileTimeChecks::is_same<Arg, const char *>::value, "The input for appendStrToBuffer can only be a string literal");
+		
+		const auto stringLength = strlen(arg);
+		if(stringLength > size)
+			return false;
+		
 		strcat(buffer, (const char *) arg);
 		return true;
 	}
@@ -44,7 +50,6 @@ namespace Utils
 	 * Appends multiple C-style string into the provided buffer. The user is responsible for making sure the buffer is cleared before appending. 
 	 * This variant will return whether the appending has finished succesfully. This variant is slower then the usafe variant
 	 * as it will check the length of the string before appending for every string. If speed is more important then reliabilty, use ::appendStringsUnsafe(char *, Arg, Args...) 
-	 * (WIP)
 	 * 
 	 * \param buffer The buffer to write into
 	 * \param size The size of the buffer
@@ -56,8 +61,15 @@ namespace Utils
 	bool appendStrings(char * buffer, size_t size, Arg arg, Args... args)
 	{
 		static_assert(CompileTimeChecks::is_same<Arg, const char *>::value,  "The input for appendStrToBuffer can only be a string literal");
+		
+		const auto stringLength = strlen(arg);
+		if(stringLength > size)
+			return false;
+
+		size -= stringLength;
+
 		strcat(buffer, (const char *) arg);
-		return appendStringsUnsafe(buffer, args...);
+		return appendStrings(buffer, size, args...);
 	}
 }
 #endif

@@ -1,4 +1,4 @@
-#include "mqtt_eth.h"
+#include "mqtt_enc28j60_ethernet.h"
 #include <EthernetENC.h>
 #include <stdlib.h>
 
