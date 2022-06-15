@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-TEST(StringAppendTest, StringAppendUnsafe_OneInputString_GeneratesOutputString)
+TEST(StringAppendTest, StringAppend_OneInputString_GeneratesOutputString)
 {
     char buffer[32] = {0};
     const auto result = Utils::appendStrings(buffer, 32, "test");
