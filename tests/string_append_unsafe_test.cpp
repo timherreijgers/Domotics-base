@@ -7,7 +7,7 @@ TEST(StringAppendUnsafeTest, StringAppendUnsafe_OneInputString_GeneratesOutputSt
     char buffer[32] = {0};
     Utils::appendStringsUnsafe(buffer, "test");
 
-    ASSERT_TRUE(strcmp(buffer, "test"));
+    ASSERT_STREQ(buffer, "test");
 }
 
 TEST(StringAppendUnsafeTest, StringAppendUnsafe_TwoInputString_GeneratesOutputString)
@@ -15,7 +15,7 @@ TEST(StringAppendUnsafeTest, StringAppendUnsafe_TwoInputString_GeneratesOutputSt
     char buffer[32] = {0};
     Utils::appendStringsUnsafe(buffer, "test", "Tset");
 
-    ASSERT_TRUE(strcmp(buffer, "testTset"));
+    ASSERT_STREQ(buffer, "testTset");
 }
 
 TEST(StringAppendUnsafeTest, StringAppendUnsafe_ThreeInputString_GeneratesOutputString)
@@ -23,5 +23,5 @@ TEST(StringAppendUnsafeTest, StringAppendUnsafe_ThreeInputString_GeneratesOutput
     char buffer[32] = {0};
     Utils::appendStringsUnsafe(buffer, "test", "Tset", "bla");
 
-    ASSERT_TRUE(strcmp(buffer, "testTsetbla"));
+    ASSERT_STREQ(buffer, "testTsetbla");
 }
