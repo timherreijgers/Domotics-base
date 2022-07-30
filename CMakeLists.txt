@@ -6,4 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 enable_testing()
 
+add_library(DomoticsBase
+        src/mqtt/mqtt_message_parser.cpp)
+
+target_include_directories(DomoticsBase PUBLIC
+        include)
+
 add_subdirectory(tests)
