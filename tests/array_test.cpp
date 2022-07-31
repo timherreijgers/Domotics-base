@@ -10,7 +10,7 @@ public:
 
     }
 
-    Array<int, 5> m_array{};
+    Data::Array<int, 5> m_array{};
 };
 
 TEST_F(ArrayTest, ArrayWithSize10ReturnsSize10)
