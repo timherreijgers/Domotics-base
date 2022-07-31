@@ -3,6 +3,8 @@
 
 #include <inttypes.h>
 
+namespace Data{
+
 template<typename T, size_t N>
 class Array
 {
@@ -30,5 +32,7 @@ public:
 private:
     T data[N];
 };
+
+} // namespace Data
 
 #endif // __ARRAY_H__
