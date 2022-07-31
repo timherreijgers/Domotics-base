@@ -19,6 +19,11 @@ public:
 
     T & operator[](size_t index)
     {
+        return at(index);
+    }
+
+    [[nodiscard]] T & at(size_t index)
+    {
         if(index < 0 || index >= N)
             throw "Out of bounds";
 

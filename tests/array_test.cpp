@@ -36,3 +36,9 @@ TEST_F(ArrayTest, AccessingIndexOutOfBoundsThrowsException)
 {
     EXPECT_ANY_THROW(m_array[1000000] = 10);
 }
+
+TEST_F(ArrayTest, AccessingItemUsingAtWorksCorrectly)
+{
+    m_array[2] = 1000000;
+    ASSERT_EQ(m_array[2], m_array.at(2));
+}
