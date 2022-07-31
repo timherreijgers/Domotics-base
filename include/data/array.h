@@ -22,6 +22,11 @@ public:
         return at(index);
     }
 
+    T * operator&()
+    {
+        return data;
+    }
+
     [[nodiscard]] T & at(size_t index)
     {
         if(index < 0 || index >= N)
