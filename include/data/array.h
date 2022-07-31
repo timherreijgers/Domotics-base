@@ -1,7 +1,7 @@
 #ifndef __ARRAY_H__
 #define __ARRAY_H__
 
-#include <inttypes.h>
+#include <stddef.h>
 
 namespace Data{
 
