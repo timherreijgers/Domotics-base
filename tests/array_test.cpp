@@ -41,3 +41,9 @@ TEST_F(ArrayTest, AccessingItemUsingAtWorksCorrectly)
     m_array[2] = 1000000;
     ASSERT_EQ(m_array[2], m_array.at(2));
 }
+
+TEST_F(ArrayTest, AccessingFirstElementUsingRefenceOperatorWorksCorrectly)
+{
+    m_array[2] = 1000000;
+    ASSERT_EQ(m_array[2], *((&m_array) + 2));
+}
