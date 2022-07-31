@@ -7,7 +7,6 @@ class ArrayTest : public ::testing::Test
 public:
     void SetUp() override
     {
-
     }
 
     Data::Array<int, 5> m_array{};
