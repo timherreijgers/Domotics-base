@@ -5,6 +5,8 @@
 #ifndef __MQTT_MESSAGE_PARSER_H__
 #define __MQTT_MESSAGE_PARSER_H__
 
+#include <string.h>
+
 template<typename T>
 class MqttMessageParser
 {
@@ -12,8 +14,10 @@ public:
 
     void parse(const char * data, T & holder)
     {
-        holder = 100;
+        int value = 100;
+        memcpy(&holder, &value, sizeof(holder));
     }
+
 private:
     friend class Factory;
 

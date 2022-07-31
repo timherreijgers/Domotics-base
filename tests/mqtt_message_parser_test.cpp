@@ -2,11 +2,11 @@
 
 #include <gtest/gtest.h>
 
-struct TestInt
+template <typename FirstType, typename SecondType>
+struct TestStruct
 {
-    int value1;
-    int value2;
-    int value3;
+    FirstType value1;
+    SecondType value2;
 };
 
 class MqttMessageParserTest : public ::testing::Test
@@ -29,10 +29,15 @@ TEST_F(MqttMessageParserTest, messageConsistingOfOneIntParsesReturnsInt)
     ASSERT_EQ(result, 100);
 }
 
-//TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithCommaDelimiterStructContainingCorrectInts)
-//{
-//    MqttMessageParser parser = MqttMessageParser<int>::Factory().parseAsInt().build();
-//    const auto result = parser.parse("100");
-//
-//    ASSERT_EQ(result, 100);
-//}
+TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithCommaDelimiterStructContainingCorrectInts)
+{
+    using DataType = TestStruct<int, int>;
+
+    MqttMessageParser parser = MqttMessageParser<DataType>::Factory().delimiter(',').parseAsInt().parseAsInt().build();
+    DataType data;
+
+    parser.parse("100,200", data);
+
+    ASSERT_EQ(data.value1, 100);
+    ASSERT_EQ(data.value2, 200);
+}
