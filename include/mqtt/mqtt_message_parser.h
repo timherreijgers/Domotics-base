@@ -1,21 +1,32 @@
-//
-// Created by Tim on 29/07/2022.
-//
-
 #ifndef __MQTT_MESSAGE_PARSER_H__
 #define __MQTT_MESSAGE_PARSER_H__
 
+#include "data/array.h"
+
 #include <string.h>
+#include <stdlib.h>
 
 template<typename T>
 class MqttMessageParser
 {
 public:
 
-    void parse(const char * data, T & holder)
+    void parse(char * data, T & holder)
     {
-        int value = 100;
-        memcpy(&holder, &value, sizeof(holder));
+        char buffer[sizeof(T)] = {0x00};
+        size_t index = 0;
+        char * token = strtok(data, ",");
+
+        while(token != nullptr)
+        {
+            const auto value = atoi(token);
+            memcpy(buffer + index, &value, sizeof(value));
+            index += sizeof(value);
+
+            token = strtok(nullptr, ",");
+        }
+
+        memcpy(&holder, buffer, sizeof(holder));
     }
 
 private:

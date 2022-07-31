@@ -36,7 +36,8 @@ TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithCommaDelimiterStruct
     MqttMessageParser parser = MqttMessageParser<DataType>::Factory().delimiter(',').parseAsInt().parseAsInt().build();
     DataType data;
 
-    parser.parse("100,200", data);
+    char buffer[] = "100,200";
+    parser.parse(buffer, data);
 
     ASSERT_EQ(data.value1, 100);
     ASSERT_EQ(data.value2, 200);
