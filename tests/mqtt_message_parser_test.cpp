@@ -38,7 +38,7 @@ class MqttMessageParserTest : public ::testing::Test
 
 TEST_F(MqttMessageParserTest, messageConsistingOfOneIntParsesReturnsInt)
 {
-    MqttMessageParser parser = MqttMessageParser<int, 1>('j', ParsingFunctions::parseInt);
+    MqttMessageParser parser = MqttMessageParser<int, 1>(',', ParsingFunctions::parseInt);
 
     const auto result = parser.parse("100");
 
