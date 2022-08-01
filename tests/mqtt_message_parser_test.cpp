@@ -14,14 +14,9 @@ class MqttMessageParserTest : public ::testing::Test
 
 };
 
-TEST_F(MqttMessageParserTest, messageConsistingOfNoDataThrowsError)
-{
-    EXPECT_ANY_THROW(MqttMessageParser parser = MqttMessageParser<int>::Factory().build());
-}
-
 TEST_F(MqttMessageParserTest, messageConsistingOfOneIntParsesReturnsInt)
 {
-    MqttMessageParser parser = MqttMessageParser<int>::Factory().parseAsInt().build();
+    MqttMessageParser parser = MqttMessageParser<int, 1>('j', ParsingFunctions::parseInt);
     int result = 0;
 
     parser.parse("100", result);
@@ -33,7 +28,9 @@ TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithCommaDelimiterStruct
 {
     using DataType = TestStruct<int, int>;
 
-    MqttMessageParser parser = MqttMessageParser<DataType>::Factory().delimiter(',').parseAsInt().parseAsInt().build();
+    MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
+                                                              ParsingFunctions::parseInt,
+                                                              ParsingFunctions::parseInt);
     DataType data;
 
     char buffer[] = "100,200";
@@ -47,8 +44,9 @@ TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithColonDelimiterStruct
 {
     using DataType = TestStruct<int, int>;
 
-    MqttMessageParser parser = MqttMessageParser<DataType>::Factory().delimiter(':').parseAsInt().parseAsInt().build();
-    DataType data;
+    MqttMessageParser parser = MqttMessageParser<DataType, 2>(':',
+                                                              ParsingFunctions::parseInt,
+                                                              ParsingFunctions::parseInt);    DataType data;
 
     char buffer[] = "100:200";
     parser.parse(buffer, data);
@@ -61,13 +59,14 @@ TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneFloatWithCommaDelim
 {
     using DataType = TestStruct<int, float>;
 
-    MqttMessageParser<DataType, void(*)(), void(*)()> parser(',', [](){}, [](){});
-//    MqttMessageParser parser = MqttMessageParser<DataType>::Factory().delimiter(',').parseAsInt().parseAsInt().build();
+    MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
+                                                              ParsingFunctions::parseInt,
+                                                              ParsingFunctions::parseFloat);
     DataType data;
 
-    char buffer[] = "100:3.14";
+    char buffer[] = "100,3.14";
     parser.parse(buffer, data);
 
     ASSERT_EQ(data.value1, 100);
-    ASSERT_EQ(data.value2, 3.14);
+    ASSERT_EQ(data.value2, 3.14f);
 }
