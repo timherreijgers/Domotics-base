@@ -14,6 +14,13 @@ namespace ParsingFunctions {
 int parseInt(const char * str, char * buffer);
 int parseFloat(const char * str, char * buffer);
 
+template <typename T>
+int addToBuffer(const T& value, char * buffer)
+{
+    memcpy(buffer, &value, sizeof(value));
+    return sizeof(value);
+}
+
 } // namespace ParsingFunctions
 
 template<typename T, size_t ElementCount>
