@@ -2,14 +2,27 @@
 #define __MQTT_MESSAGE_PARSER_H__
 
 #include "data/array.h"
+#include "utils/compile_time_checks.h"
 
 #include <string.h>
 #include <stdlib.h>
 
-template<typename T>
+using MessageParserParseFunction = void(*)();
+
+template<typename T, typename ...Args>
 class MqttMessageParser
 {
 public:
+
+    MqttMessageParser(char delimiter, Args... args)
+    {
+        m_delimiter[0] = delimiter;
+        m_delimiter[1] = 0x00;
+
+        size_t index = 0;
+        [[maybe_unused]] const auto size = m_parsingFunctions.size();
+        ((m_parsingFunctions[index++] = args), ...);
+    }
 
     void parse(char * data, T & holder)
     {
@@ -33,12 +46,7 @@ private:
     friend class Factory;
 
     Data::Array<char, 2> m_delimiter;
-
-    MqttMessageParser(char delimiter)
-    {
-        m_delimiter[0] = delimiter;
-        m_delimiter[1] = 0x00;
-    }
+    Data::Array<MessageParserParseFunction, sizeof...(Args)> m_parsingFunctions;
 
 public:
     class Factory
@@ -69,5 +77,8 @@ public:
         char m_delimiter = ',';
     };
 };
+
+template <typename... Args>
+MqttMessageParser(char delimiter, Args... args) -> MqttMessageParser<Args...>;
 
 #endif // __MQTT_MESSAGE_PARSER_H__
