@@ -31,11 +31,13 @@ public:
         ((m_parsingFunctions[index++] = args), ...);
     }
 
-    void parse(char * data, T & holder)
+    T parse(char * data)
     {
+        T holder{};
         char buffer[sizeof(T)] = {0x00};
         size_t index = 0;
         size_t arrayIndex = 0;
+
         char * token = strtok(data, &m_delimiter);
 
         while(token != nullptr)
@@ -45,6 +47,7 @@ public:
         }
 
         memcpy(&holder, buffer, sizeof(holder));
+        return holder;
     }
 
 private:
