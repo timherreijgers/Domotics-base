@@ -56,3 +56,18 @@ TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithColonDelimiterStruct
     ASSERT_EQ(data.value1, 100);
     ASSERT_EQ(data.value2, 200);
 }
+
+TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneFloatWithCommaDelimiterStructContainingCorrectInts)
+{
+    using DataType = TestStruct<int, float>;
+
+    MqttMessageParser<DataType, void(*)(), void(*)()> parser(',', [](){}, [](){});
+//    MqttMessageParser parser = MqttMessageParser<DataType>::Factory().delimiter(',').parseAsInt().parseAsInt().build();
+    DataType data;
+
+    char buffer[] = "100:3.14";
+    parser.parse(buffer, data);
+
+    ASSERT_EQ(data.value1, 100);
+    ASSERT_EQ(data.value2, 3.14);
+}
