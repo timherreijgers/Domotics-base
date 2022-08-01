@@ -20,8 +20,7 @@ int parseTestEnum(const char * str, char * buffer)
         return test_enum::invalid;
     }(str);
 
-    memcpy(buffer, &value, sizeof(value));
-    return sizeof(value);
+    return ParsingFunctions::addToBuffer(value, buffer);
 }
 
 template <typename FirstType, typename SecondType>
