@@ -7,20 +7,27 @@
 #include <string.h>
 #include <stdlib.h>
 
-using MessageParserParseFunction = void(*)();
+using MessageParserParseFunction = int(*)(const char * str, char * buffer);
 
-template<typename T, typename ...Args>
+namespace ParsingFunctions {
+
+int parseInt(const char * str, char * buffer);
+int parseFloat(const char * str, char * buffer);
+
+} // namespace ParsingFunctions
+
+template<typename T, size_t ElementCount>
 class MqttMessageParser
 {
 public:
-
+    template<typename ...Args>
     MqttMessageParser(char delimiter, Args... args)
     {
+        static_assert(ElementCount == sizeof...(args), "Number of parsing functions doesn't equal the ElementCount");
         m_delimiter[0] = delimiter;
         m_delimiter[1] = 0x00;
 
         size_t index = 0;
-        [[maybe_unused]] const auto size = m_parsingFunctions.size();
         ((m_parsingFunctions[index++] = args), ...);
     }
 
@@ -28,14 +35,12 @@ public:
     {
         char buffer[sizeof(T)] = {0x00};
         size_t index = 0;
+        size_t arrayIndex = 0;
         char * token = strtok(data, &m_delimiter);
 
         while(token != nullptr)
         {
-            const auto value = atoi(token);
-            memcpy(buffer + index, &value, sizeof(value));
-            index += sizeof(value);
-
+            index += m_parsingFunctions[arrayIndex++](token, buffer + index);
             token = strtok(nullptr, &m_delimiter);
         }
 
@@ -46,36 +51,7 @@ private:
     friend class Factory;
 
     Data::Array<char, 2> m_delimiter;
-    Data::Array<MessageParserParseFunction, sizeof...(Args)> m_parsingFunctions;
-
-public:
-    class Factory
-    {
-    public:
-        [[nodiscard]] Factory& delimiter(char delimiter)
-        {
-            m_delimiter = delimiter;
-            return *this;
-        }
-
-        [[nodiscard]] Factory& parseAsInt()
-        {
-            m_throw = false;
-            return *this;
-        }
-
-        [[nodiscard]] MqttMessageParser<T> build()
-        {
-            if(m_throw)
-                throw "Why would you even try to build a parser without any data in it? :(";
-
-            return MqttMessageParser<T>(m_delimiter);
-        }
-
-    private:
-        bool m_throw = true;
-        char m_delimiter = ',';
-    };
+    Data::Array<MessageParserParseFunction, ElementCount> m_parsingFunctions;
 };
 
 template <typename... Args>
