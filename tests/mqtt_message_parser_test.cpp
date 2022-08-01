@@ -1,6 +1,28 @@
 #include "mqtt/mqtt_message_parser.h"
 
 #include <gtest/gtest.h>
+#include <string.h>
+
+enum class test_enum
+{
+    enum_value_1,
+    enum_value_2,
+    enum_value_3,
+    invalid
+};
+
+int parseTestEnum(const char * str, char * buffer)
+{
+    const auto value = [](const char * str) {
+        if(strcmp(str, "enum_value_1") == 0) return test_enum::enum_value_1;
+        if(strcmp(str, "enum_value_2") == 0) return test_enum::enum_value_2;
+        if(strcmp(str, "enum_value_3") == 0) return test_enum::enum_value_3;
+        return test_enum::invalid;
+    }(str);
+
+    memcpy(buffer, &value, sizeof(value));
+    return sizeof(value);
+}
 
 template <typename FirstType, typename SecondType>
 struct TestStruct
@@ -17,9 +39,8 @@ class MqttMessageParserTest : public ::testing::Test
 TEST_F(MqttMessageParserTest, messageConsistingOfOneIntParsesReturnsInt)
 {
     MqttMessageParser parser = MqttMessageParser<int, 1>('j', ParsingFunctions::parseInt);
-    int result = 0;
 
-    parser.parse("100", result);
+    const auto result = parser.parse("100");
 
     ASSERT_EQ(result, 100);
 }
@@ -31,10 +52,9 @@ TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithCommaDelimiterStruct
     MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
                                                               ParsingFunctions::parseInt,
                                                               ParsingFunctions::parseInt);
-    DataType data;
 
     char buffer[] = "100,200";
-    parser.parse(buffer, data);
+    const auto data = parser.parse(buffer);
 
     ASSERT_EQ(data.value1, 100);
     ASSERT_EQ(data.value2, 200);
@@ -46,27 +66,56 @@ TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithColonDelimiterStruct
 
     MqttMessageParser parser = MqttMessageParser<DataType, 2>(':',
                                                               ParsingFunctions::parseInt,
-                                                              ParsingFunctions::parseInt);    DataType data;
+                                                              ParsingFunctions::parseInt);
 
     char buffer[] = "100:200";
-    parser.parse(buffer, data);
+    const auto data = parser.parse(buffer);
 
     ASSERT_EQ(data.value1, 100);
     ASSERT_EQ(data.value2, 200);
 }
 
-TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneFloatWithCommaDelimiterStructContainingCorrectInts)
+TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneFloatWithCommaDelimiterStructContainingCorrectValues)
 {
     using DataType = TestStruct<int, float>;
 
     MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
                                                               ParsingFunctions::parseInt,
                                                               ParsingFunctions::parseFloat);
-    DataType data;
 
     char buffer[] = "100,3.14";
-    parser.parse(buffer, data);
+    const auto data = parser.parse(buffer);
 
     ASSERT_EQ(data.value1, 100);
     ASSERT_EQ(data.value2, 3.14f);
+}
+
+TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneEnumWithCommaDelimiterStructContainingCorrectValues)
+{
+    using DataType = TestStruct<int, test_enum>;
+
+    MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
+                                                              ParsingFunctions::parseInt,
+                                                              parseTestEnum);
+
+    char buffer[] = "100,enum_value_1";
+    const auto data = parser.parse(buffer);
+
+    ASSERT_EQ(data.value1, 100);
+    ASSERT_EQ(data.value2, test_enum::enum_value_1);
+}
+
+TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneUnknownEnumWithCommaDelimiterStructContainingCorrectValues)
+{
+    using DataType = TestStruct<int, test_enum>;
+
+    MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
+                                                              ParsingFunctions::parseInt,
+                                                              parseTestEnum);
+
+    char buffer[] = "100,enum_value_10";
+    const auto data = parser.parse(buffer);
+
+    ASSERT_EQ(data.value1, 100);
+    ASSERT_EQ(data.value2, test_enum::invalid);
 }
