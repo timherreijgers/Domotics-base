@@ -68,8 +68,6 @@ public:
     }
 
 private:
-    friend class Factory;
-
     Data::Array<char, 2> m_delimiter;
     Data::Array<MessageParserParseFunction, ElementCount> m_parsingFunctions;
 };
