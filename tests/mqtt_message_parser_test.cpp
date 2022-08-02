@@ -33,7 +33,7 @@ class MqttMessageParserTest : public ::testing::Test
 
 TEST_F(MqttMessageParserTest, messageConsistingOfOneIntParsesReturnsInt)
 {
-    MqttMessageParser parser = MqttMessageParser<int, 1>(',', ParsingFunctions::parseInt);
+    MqttMessageParser<int, 1> parser(',', ParsingFunctions::parseInt);
 
     const auto result = parser.parse("100");
 
@@ -44,9 +44,9 @@ TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithCommaDelimiterStruct
 {
     using DataType = TestStruct<int, int>;
 
-    MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
-                                                              ParsingFunctions::parseInt,
-                                                              ParsingFunctions::parseInt);
+    MqttMessageParser<DataType, 2> parser(',',
+                                          ParsingFunctions::parseInt,
+                                          ParsingFunctions::parseInt);
 
     char buffer[] = "100,200";
     const auto data = parser.parse(buffer);
@@ -59,9 +59,9 @@ TEST_F(MqttMessageParserTest, messageConsistingOfTwoIntsWithColonDelimiterStruct
 {
     using DataType = TestStruct<int, int>;
 
-    MqttMessageParser parser = MqttMessageParser<DataType, 2>(':',
-                                                              ParsingFunctions::parseInt,
-                                                              ParsingFunctions::parseInt);
+    MqttMessageParser<DataType, 2> parser(':',
+                                          ParsingFunctions::parseInt,
+                                          ParsingFunctions::parseInt);
 
     char buffer[] = "100:200";
     const auto data = parser.parse(buffer);
@@ -74,9 +74,9 @@ TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneFloatWithCommaDelim
 {
     using DataType = TestStruct<int, float>;
 
-    MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
-                                                              ParsingFunctions::parseInt,
-                                                              ParsingFunctions::parseFloat);
+    MqttMessageParser<DataType, 2> parser(',',
+                                          ParsingFunctions::parseInt,
+                                          ParsingFunctions::parseFloat);
 
     char buffer[] = "100,3.14";
     const auto data = parser.parse(buffer);
@@ -89,9 +89,9 @@ TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneEnumWithCommaDelimi
 {
     using DataType = TestStruct<int, test_enum>;
 
-    MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
-                                                              ParsingFunctions::parseInt,
-                                                              ParsingFunctions::parseCustom<test_enum, parseTestEnum>);
+    MqttMessageParser<DataType, 2> parser(',',
+                                          ParsingFunctions::parseInt,
+                                          ParsingFunctions::parseCustom<test_enum, parseTestEnum>);
 
     char buffer[] = "100,enum_value_1";
     const auto data = parser.parse(buffer);
@@ -104,9 +104,9 @@ TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneUnknownEnumWithComm
 {
     using DataType = TestStruct<int, test_enum>;
 
-    MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
-                                                              ParsingFunctions::parseInt,
-                                                              ParsingFunctions::parseCustom<test_enum, parseTestEnum>);
+    MqttMessageParser<DataType, 2> parser(',',
+                                          ParsingFunctions::parseInt,
+                                          ParsingFunctions::parseCustom<test_enum, parseTestEnum>);
 
     char buffer[] = "100,enum_value_10";
     const auto data = parser.parse(buffer);
