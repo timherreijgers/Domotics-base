@@ -11,16 +11,12 @@ enum class test_enum
     invalid
 };
 
-int parseTestEnum(const char * str, char * buffer)
+test_enum parseTestEnum(const char * str)
 {
-    const auto value = [](const char * str) {
-        if(strcmp(str, "enum_value_1") == 0) return test_enum::enum_value_1;
-        if(strcmp(str, "enum_value_2") == 0) return test_enum::enum_value_2;
-        if(strcmp(str, "enum_value_3") == 0) return test_enum::enum_value_3;
-        return test_enum::invalid;
-    }(str);
-
-    return ParsingFunctions::addToBuffer(value, buffer);
+    if(strcmp(str, "enum_value_1") == 0) return test_enum::enum_value_1;
+    if(strcmp(str, "enum_value_2") == 0) return test_enum::enum_value_2;
+    if(strcmp(str, "enum_value_3") == 0) return test_enum::enum_value_3;
+    return test_enum::invalid;
 }
 
 template <typename FirstType, typename SecondType>
@@ -95,7 +91,7 @@ TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneEnumWithCommaDelimi
 
     MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
                                                               ParsingFunctions::parseInt,
-                                                              parseTestEnum);
+                                                              ParsingFunctions::parseCustom<test_enum, parseTestEnum>);
 
     char buffer[] = "100,enum_value_1";
     const auto data = parser.parse(buffer);
@@ -110,7 +106,7 @@ TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneUnknownEnumWithComm
 
     MqttMessageParser parser = MqttMessageParser<DataType, 2>(',',
                                                               ParsingFunctions::parseInt,
-                                                              parseTestEnum);
+                                                              ParsingFunctions::parseCustom<test_enum, parseTestEnum>);
 
     char buffer[] = "100,enum_value_10";
     const auto data = parser.parse(buffer);
