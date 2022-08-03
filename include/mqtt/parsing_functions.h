@@ -1,6 +1,8 @@
 #ifndef __PARSING_FUNCTIONS_H__
 #define __PARSING_FUNCTIONS_H__
 
+#include <string.h>
+
 /**
  * Namespace containing predefined parsing functions for the \ref MqttMessageParser
  */
