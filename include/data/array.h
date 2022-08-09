@@ -64,9 +64,6 @@ public:
      */
     [[nodiscard]] T & at(size_t index)
     {
-        if(index < 0 || index >= N)
-            throw "Out of bounds";
-
         return data[index];
     }
 
