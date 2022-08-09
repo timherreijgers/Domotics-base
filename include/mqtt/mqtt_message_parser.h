@@ -16,7 +16,7 @@ using MessageParserParseFunction = int(*)(const char * str, char * buffer);
  * This class provides a generic interface to parse message received over MQTT, given that these messages follow this format:
  * [value][delimiter][value][delimiter][value]....
  *
- * In this message, the delimiter must be one character long, for example, a comma. The delimiter must also be consistend within
+ * In this message, the delimiter must be one character long, for example, a comma. The delimiter must also be consistent within
  * the message. A message following the format would be:
  * 100,3.14,ON
  *
