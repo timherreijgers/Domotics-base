@@ -23,6 +23,8 @@ using MessageParserParseFunction = int(*)(const char * str, char * buffer);
  * The message parser is mostly constructed at compile time using templates, meaning that only messages can be used of which the
  * format is fully known at compile time. Using a lot of different messages formats might result in a big increase in binary size.
  *
+ * For an example on how to use this class, see tests/mqtt_message_parser_test.cpp
+ *
  * \tparam T The type to parse
  * \tparam ElementCount The number of values in a message
  */
