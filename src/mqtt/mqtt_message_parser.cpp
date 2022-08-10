@@ -10,7 +10,7 @@ int parseInt(const char * str, char * buffer)
 
 int parseFloat(const char * str, char * buffer)
 {
-    const auto value = strtof(str, nullptr);
+    const auto value = (float) atof(str);
     return addToBuffer(value, buffer);
 }
 
