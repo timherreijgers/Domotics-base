@@ -73,7 +73,7 @@ $(function() {
 <p>Base class for MQTT communication.  
  <a href="class_mqtt.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="mqtt_8h_source.html">mqtt.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="mqtt_2mqtt_8h_source.html">mqtt.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -98,7 +98,7 @@ Protected Member Functions</h2></td></tr>
 <p>This class provides the base functionality to enable MQTT communication and contains all logic to do with MQTT. All connection logic is contained within the MqttEthernet and <a class="el" href="class_mqtt_esp8266_wifi.html">MqttEsp8266Wifi</a> classes. One of these classes should be used, depending on the hardware used. To actually send/receive messages, as well as keeping the connection alive, the Mqtt::poll() methods should be called periodically</p>
 <p>To enable more ways to communicate with connection hardware, for example a different ethernet controller, this class can be extended. The hardware abstraction should provide a <a href="https://www.arduino.cc/reference/en/libraries/wifi/">Client</a>. This Client is used as an interface between the hardware and the MQTT middleware. This Client has to be passed to the <a class="el" href="class_mqtt.html#a1561b88787403d956b0c03dea1a38f61">Mqtt::Mqtt(const char *, Client &amp;)</a> constructor. The Client passed to the MQTT middleware <u>CAN NOT</u> go out of scope, as a reference to this object is saved. Besides the constructor, only the <a class="el" href="class_mqtt.html#a3c0ce306b95e77b2f3fcfbac9438e56f">Mqtt::connect(const IPAddress &amp;)</a>method should be implemented. This method should connect to the broker using the chosen hardware, after which it should call <a class="el" href="class_mqtt.html#a40040785e5f30a15ce7afb223742ce91">Mqtt::connectToBroker(const IPAddress &amp;)</a>to let the base class establish the actual connection to the broker. </p>
 
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00044">44</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mqtt_2mqtt_8h_source.html#l00044">44</a> of file <a class="el" href="mqtt_2mqtt_8h_source.html">mqtt.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1561b88787403d956b0c03dea1a38f61"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1561b88787403d956b0c03dea1a38f61">&#9670;&nbsp;</a></span>Mqtt()</h2>
@@ -287,7 +287,7 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Subscribes to a topic. To receive the messages, the function <a class="el" href="mqtt_8h.html#aaa89e9c711cd15d7868f92e3fbf0c2f3">mqttMessageReceived(const char *, const uint8_t *, uint32_t)</a> must be implemented. If subscribing to the topic succeeds, this function will return true. If not, it will return false.</p>
+<p>Subscribes to a topic. To receive the messages, the function <a class="el" href="mqtt_2mqtt_8h.html#aaa89e9c711cd15d7868f92e3fbf0c2f3">mqttMessageReceived(const char *, const uint8_t *, uint32_t)</a> must be implemented. If subscribing to the topic succeeds, this function will return true. If not, it will return false.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">topic</td><td>The topic to subscribe to</td></tr>
@@ -299,7 +299,7 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/<a class="el" href="mqtt_8h_source.html">mqtt.h</a></li>
+<li>include/mqtt/<a class="el" href="mqtt_2mqtt_8h_source.html">mqtt.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

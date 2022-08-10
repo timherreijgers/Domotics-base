@@ -86,11 +86,18 @@ $(function() {
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="struct_utils_1_1_compile_time_checks_1_1is__same_3_01_t_00_01_t_01_4.html">   28</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="struct_utils_1_1_compile_time_checks_1_1is__same.html">is_same</a>&lt;T, T&gt; {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">enum</span> { value = 1 };</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">template</span>&lt;<span class="keywordtype">bool</span> B, <span class="keyword">class</span> T = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="struct_utils_1_1_compile_time_checks_1_1enable__if.html">   33</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="struct_utils_1_1_compile_time_checks_1_1enable__if.html">enable_if</a> {};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="struct_utils_1_1_compile_time_checks_1_1enable__if_3_01true_00_01_t_01_4.html">   36</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="struct_utils_1_1_compile_time_checks_1_1enable__if.html">enable_if</a>&lt;true, T&gt; { <span class="keyword">typedef</span> T type; };</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="astruct_utils_1_1_compile_time_checks_1_1enable__if_html"><div class="ttname"><a href="struct_utils_1_1_compile_time_checks_1_1enable__if.html">Utils::CompileTimeChecks::enable_if</a></div><div class="ttdef"><b>Definition:</b> <a href="compile__time__checks_8h_source.html#l00033">compile_time_checks.h:33</a></div></div>
 <div class="ttc" id="astruct_utils_1_1_compile_time_checks_1_1is__same_html"><div class="ttname"><a href="struct_utils_1_1_compile_time_checks_1_1is__same.html">Utils::CompileTimeChecks::is_same</a></div><div class="ttdef"><b>Definition:</b> <a href="compile__time__checks_8h_source.html#l00019">compile_time_checks.h:19</a></div></div>
 <div class="ttc" id="anamespace_utils_html"><div class="ttname"><a href="namespace_utils.html">Utils</a></div><div class="ttdef"><b>Definition:</b> <a href="compile__time__checks_8h_source.html#l00004">compile_time_checks.h:4</a></div></div>
 <!-- start footer part -->

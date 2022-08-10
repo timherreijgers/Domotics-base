@@ -69,47 +69,9 @@ $(function() {
 <div class="title">mqtt.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="mqtt_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __MQTT_H__</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __MQTT_H__</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;PubSubClient.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;IPAddress.h&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt_8h.html#aaa89e9c711cd15d7868f92e3fbf0c2f3">mqttMessageReceived</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic, <span class="keyword">const</span> uint8_t *payload, uint32_t length);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_mqtt.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_mqtt.html">Mqtt</a></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">public</span>: </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ~<a class="code" href="class_mqtt.html">Mqtt</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_mqtt.html#a82438f266387890118c104dd474286d1">publishOnTopic</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic, <span class="keyword">const</span> <span class="keywordtype">char</span> *payload);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_mqtt.html#aaf93355dee32608181f4474a759e9773">subscribeToTopic</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_mqtt.html#a3c0ce306b95e77b2f3fcfbac9438e56f">connect</a>(<span class="keyword">const</span> IPAddress &amp;brokerIp) = 0;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_mqtt.html#ae33f44a8645be730332d5c0e4b295717">loop</a>();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_mqtt.html#a40040785e5f30a15ce7afb223742ce91">connectToBroker</a>(<span class="keyword">const</span> IPAddress &amp;brokerIp);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="class_mqtt.html#a1561b88787403d956b0c03dea1a38f61">Mqtt</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Client &amp;client);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *m_name;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    PubSubClient m_mqttClient;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#warning mqtt.h has been moved to mqtt/mqtt.h. This header will be removed in a future release</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;mqtt/mqtt.h&quot;</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_mqtt_html_a40040785e5f30a15ce7afb223742ce91"><div class="ttname"><a href="class_mqtt.html#a40040785e5f30a15ce7afb223742ce91">Mqtt::connectToBroker</a></div><div class="ttdeci">bool connectToBroker(const IPAddress &amp;brokerIp)</div></div>
-<div class="ttc" id="aclass_mqtt_html_ae33f44a8645be730332d5c0e4b295717"><div class="ttname"><a href="class_mqtt.html#ae33f44a8645be730332d5c0e4b295717">Mqtt::loop</a></div><div class="ttdeci">bool loop()</div></div>
-<div class="ttc" id="aclass_mqtt_html"><div class="ttname"><a href="class_mqtt.html">Mqtt</a></div><div class="ttdoc">Base class for MQTT communication.</div><div class="ttdef"><b>Definition:</b> <a href="mqtt_8h_source.html#l00044">mqtt.h:44</a></div></div>
-<div class="ttc" id="aclass_mqtt_html_a1561b88787403d956b0c03dea1a38f61"><div class="ttname"><a href="class_mqtt.html#a1561b88787403d956b0c03dea1a38f61">Mqtt::Mqtt</a></div><div class="ttdeci">Mqtt(const char *name, Client &amp;client)</div></div>
-<div class="ttc" id="aclass_mqtt_html_a82438f266387890118c104dd474286d1"><div class="ttname"><a href="class_mqtt.html#a82438f266387890118c104dd474286d1">Mqtt::publishOnTopic</a></div><div class="ttdeci">bool publishOnTopic(const char *topic, const char *payload)</div></div>
-<div class="ttc" id="aclass_mqtt_html_a3c0ce306b95e77b2f3fcfbac9438e56f"><div class="ttname"><a href="class_mqtt.html#a3c0ce306b95e77b2f3fcfbac9438e56f">Mqtt::connect</a></div><div class="ttdeci">virtual bool connect(const IPAddress &amp;brokerIp)=0</div></div>
-<div class="ttc" id="amqtt_8h_html_aaa89e9c711cd15d7868f92e3fbf0c2f3"><div class="ttname"><a href="mqtt_8h.html#aaa89e9c711cd15d7868f92e3fbf0c2f3">mqttMessageReceived</a></div><div class="ttdeci">void mqttMessageReceived(const char *topic, const uint8_t *payload, uint32_t length)</div></div>
-<div class="ttc" id="aclass_mqtt_html_aaf93355dee32608181f4474a759e9773"><div class="ttname"><a href="class_mqtt.html#aaf93355dee32608181f4474a759e9773">Mqtt::subscribeToTopic</a></div><div class="ttdeci">bool subscribeToTopic(const char *topic)</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

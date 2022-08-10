@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['publishontopic_31',['publishOnTopic',['../class_mqtt.html#a82438f266387890118c104dd474286d1',1,'Mqtt']]]
+  ['operator_26_52',['operator&amp;',['../class_data_1_1_array.html#a68e28e2f8091b6086401482d353d4213',1,'Data::Array']]],
+  ['operator_5b_5d_53',['operator[]',['../class_data_1_1_array.html#a2c32e09d2c71259f438783c36cd695cb',1,'Data::Array']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['is_5fsame_4',['is_same',['../struct_utils_1_1_compile_time_checks_1_1is__same.html',1,'Utils::CompileTimeChecks']]],
-  ['is_5fsame_3c_20t_2c_20t_20_3e_5',['is_same&lt; T, T &gt;',['../struct_utils_1_1_compile_time_checks_1_1is__same_3_01_t_00_01_t_01_4.html',1,'Utils::CompileTimeChecks']]]
+  ['enable_5fif_8',['enable_if',['../struct_utils_1_1_compile_time_checks_1_1enable__if.html',1,'Utils::CompileTimeChecks']]],
+  ['enable_5fif_3c_20true_2c_20t_20_3e_9',['enable_if&lt; true, T &gt;',['../struct_utils_1_1_compile_time_checks_1_1enable__if_3_01true_00_01_t_01_4.html',1,'Utils::CompileTimeChecks']]]
 ];
