@@ -1,4 +1,4 @@
-#include "mqtt.h"
+#include "mqtt/mqtt.h"
 #include "domotics_debug.h"
 
 static void onMessageReceived(char * topic, uint8_t * payload, unsigned int length);
