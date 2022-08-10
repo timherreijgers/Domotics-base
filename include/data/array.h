@@ -34,7 +34,7 @@ public:
     Array & operator=(Array &&) = delete;
 
     /**
-     * Accesses an element in the array. If the index is out of bounds it will throw an error. This operator can
+     * Accesses an element in the array. The index is not checked to be within bounds. This operator can
      * be used to either read or write to an element.
      *
      * @param index Index to access
@@ -56,7 +56,7 @@ public:
     }
 
     /**
-     * Accesses an element in the array. If the index is out of bounds it will throw an error. This function can
+     * Accesses an element in the array. The index is not checked to be within bounds. This function can
      * be used to either read or write to an element.
      *
      * @param index Index to access
