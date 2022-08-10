@@ -90,7 +90,4 @@ private:
     Data::Array<MessageParserParseFunction, ElementCount> m_parsingFunctions;
 };
 
-template <typename... Args>
-MqttMessageParser(char delimiter, Args... args) -> MqttMessageParser<Args...>;
-
 #endif // __MQTT_MESSAGE_PARSER_H__
