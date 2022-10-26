@@ -45,9 +45,8 @@ TEST_F(ArrayTest, AccessingFirstElementUsingDataFunctionWorksCorrectly)
 
 TEST_F(ArrayTest, ArraySupportsRangeBasedForLoop)
 {
-    for(const auto & _ : m_array)
+    for (const auto & _ : m_array)
     {
-
     }
 }
 
@@ -55,5 +54,7 @@ TEST_F(ArrayTest, ConstArraySupportsRangeBasedForLoop)
 {
     const Data::Array<int, 5> array{};
 
-    for(const auto & _ : array) {}
+    for (const auto & _ : array)
+    {
+    }
 }

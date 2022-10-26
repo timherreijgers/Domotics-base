@@ -10,7 +10,7 @@ namespace Data
 {
 /**
  * Template class for a data operator. The iterator assumes the collection has the
- * [] operator overloaded to read data from the collection. 
+ * [] operator overloaded to read data from the collection.
  */
 template<typename T, typename Collection>
 class CollectionIterator
