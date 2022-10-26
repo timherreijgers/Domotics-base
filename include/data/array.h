@@ -3,39 +3,9 @@
 
 #include <stddef.h>
 
-#include <array>
+#include "generic_data_iterator.h"
 
 namespace Data {
-
-template<typename T, typename C>
-class ArrayIterator
-{
-public:
-    ArrayIterator(C& array, const size_t index) :
-        m_array(array), m_index(index)
-    {
-    }
-
-    bool operator !=(const ArrayIterator & other) const
-    {
-        return m_index != other.m_index;
-    }
-
-    const T & operator *() const
-    {
-        return m_array[m_index];
-    }
-
-    const ArrayIterator & operator++()
-    {
-        ++m_index;
-        return *this;
-    }
-
-private:
-    size_t m_index;
-    C& m_array;
-};
 
 /**
  *
@@ -58,6 +28,16 @@ class Array
 {
     static_assert(N > 0, "Size N has to be bigger than 0");
 public:
+    /**
+     * Definition of modifiable iterator
+     */
+    using array_iterator = CollectionIterator<T, Array<T, N>>;
+
+    /**
+     * Definition of unmodifiable iterator
+     */
+    using const_array_iterator = CollectionIterator<T, const Array<T, N>>;
+
     Array() = default;
     ~Array() = default;
     Array(const Array &) = delete;
@@ -142,9 +122,6 @@ public:
     {
         return N;
     }
-
-    using array_iterator = ArrayIterator<T, Array<T, N>>;
-    using const_array_iterator = ArrayIterator<T, const Array<T, N>>;
 
     /**
      * Returns an iterator to the begin of the array
