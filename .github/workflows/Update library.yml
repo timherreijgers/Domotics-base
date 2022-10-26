@@ -20,7 +20,7 @@ jobs:
           pip install --upgrade platformio
       - name: Update version
         run: |
-          find library.json -type f -exec sed -i "s/\"version.*,/\"version\": \"1.0.0\",/g" {} \;
+          find library.json -type f -exec sed -i "s/\"version.*,/\"version\": \"${{github.ref_name}}\",/g" {} \;
 
       - name: Commit and push changes
         run: |
