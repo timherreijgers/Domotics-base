@@ -104,12 +104,12 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">size_t</span> index = 0;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">size_t</span> arrayIndex = 0;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">char</span> * token = strtok(data, &amp;m_delimiter);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">char</span> * token = strtok(data, m_delimiter.<a class="code" href="class_data_1_1_array.html#a90f1c9be3eac9309ad7213a853f1cf79">data</a>());</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">while</span>(token != <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        {</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            index += m_parsingFunctions[arrayIndex++](token, buffer + index);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            token = strtok(<span class="keyword">nullptr</span>, &amp;m_delimiter);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            token = strtok(<span class="keyword">nullptr</span>, m_delimiter.<a class="code" href="class_data_1_1_array.html#a90f1c9be3eac9309ad7213a853f1cf79">data</a>());</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        memcpy(&amp;holder, buffer, <span class="keyword">sizeof</span>(holder));</div>
@@ -126,6 +126,7 @@ $(function() {
 <div class="ttc" id="aclass_mqtt_message_parser_html_a843b9a3cce8184c70938a76d02d64759"><div class="ttname"><a href="class_mqtt_message_parser.html#a843b9a3cce8184c70938a76d02d64759">MqttMessageParser::MqttMessageParser</a></div><div class="ttdeci">MqttMessageParser(char delimiter, Args... args)</div><div class="ttdef"><b>Definition:</b> <a href="mqtt__message__parser_8h_source.html#l00049">mqtt_message_parser.h:49</a></div></div>
 <div class="ttc" id="aclass_data_1_1_array_html"><div class="ttname"><a href="class_data_1_1_array.html">Data::Array&lt; char, 2 &gt;</a></div></div>
 <div class="ttc" id="aclass_mqtt_message_parser_html_af3a5b31db953dd0cbd3d86d2463e5f11"><div class="ttname"><a href="class_mqtt_message_parser.html#af3a5b31db953dd0cbd3d86d2463e5f11">MqttMessageParser::parse</a></div><div class="ttdeci">T parse(char *data)</div><div class="ttdef"><b>Definition:</b> <a href="mqtt__message__parser_8h_source.html#l00069">mqtt_message_parser.h:69</a></div></div>
+<div class="ttc" id="aclass_data_1_1_array_html_a90f1c9be3eac9309ad7213a853f1cf79"><div class="ttname"><a href="class_data_1_1_array.html#a90f1c9be3eac9309ad7213a853f1cf79">Data::Array::data</a></div><div class="ttdeci">T * data()</div><div class="ttdef"><b>Definition:</b> <a href="array_8h_source.html#l00077">array.h:77</a></div></div>
 <div class="ttc" id="aclass_mqtt_message_parser_html"><div class="ttname"><a href="class_mqtt_message_parser.html">MqttMessageParser</a></div><div class="ttdoc">MQTT message parser.</div><div class="ttdef"><b>Definition:</b> <a href="mqtt__message__parser_8h_source.html#l00032">mqtt_message_parser.h:32</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,10 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "aceilmopsu",
-  1: "aeim",
+  0: "abcdeilmopsu",
+  1: "aceim",
   2: "pu",
   3: "m",
-  4: "aclmops"
+  4: "abcdelmops",
+  5: "ac"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "namespaces",
   3: "files",
-  4: "functions"
+  4: "functions",
+  5: "typedefs"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "Classes",
   2: "Namespaces",
   3: "Files",
-  4: "Functions"
+  4: "Functions",
+  5: "Typedefs"
 };
 

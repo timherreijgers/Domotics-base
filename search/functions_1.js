@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['connect_44',['connect',['../class_mqtt.html#a3c0ce306b95e77b2f3fcfbac9438e56f',1,'Mqtt::connect()'],['../class_mqtt_enc28_j60_ethernet.html#a0524553fd87a53c20db9c805298a10f5',1,'MqttEnc28J60Ethernet::connect()'],['../class_mqtt_esp8266_wifi.html#a4e5d7736f87de86ef5e6c628b958a49a',1,'MqttEsp8266Wifi::connect()']]],
-  ['connecttobroker_45',['connectToBroker',['../class_mqtt.html#a40040785e5f30a15ce7afb223742ce91',1,'Mqtt']]]
+  ['begin_51',['begin',['../class_data_1_1_array.html#a195846f99db81d80e7119827d3097d10',1,'Data::Array::begin()'],['../class_data_1_1_array.html#a25f9c7a7ea4b48d5d7a5c9b2bbe8efd3',1,'Data::Array::begin() const']]]
 ];

@@ -86,6 +86,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a28aeeaa0d55c459589bb6832c5d00e85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mqtt_2mqtt_8h.html#a28aeeaa0d55c459589bb6832c5d00e85">mqttDisconnected</a> ()</td></tr>
+<tr class="separator:a28aeeaa0d55c459589bb6832c5d00e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa89e9c711cd15d7868f92e3fbf0c2f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mqtt_2mqtt_8h.html#aaa89e9c711cd15d7868f92e3fbf0c2f3">mqttMessageReceived</a> (const char *topic, const uint8_t *payload, uint32_t length)</td></tr>
 <tr class="separator:aaa89e9c711cd15d7868f92e3fbf0c2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -94,6 +96,24 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="mqtt_2mqtt_8h_source.html">mqtt.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a28aeeaa0d55c459589bb6832c5d00e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28aeeaa0d55c459589bb6832c5d00e85">&#9670;&nbsp;</a></span>mqttDisconnected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqttDisconnected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Application callback which is called when disconnected from the MQTT broker. This callback should be implemented in the application to handle disconnects. These disconnects can happen, for example, when the DHCP lease ends and a new IP must be requested. When this happens the function <a class="el" href="class_mqtt.html#a3c0ce306b95e77b2f3fcfbac9438e56f">Mqtt::connect</a> should be called again to reinitialize and reconnect. </p>
+
+</div>
+</div>
 <a id="aaa89e9c711cd15d7868f92e3fbf0c2f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaa89e9c711cd15d7868f92e3fbf0c2f3">&#9670;&nbsp;</a></span>mqttMessageReceived()</h2>
 
