@@ -146,21 +146,41 @@ public:
     using array_iterator = ArrayIterator<T, Array<T, N>>;
     using const_array_iterator = ArrayIterator<T, const Array<T, N>>;
 
+    /**
+     * Returns an iterator to the begin of the array
+     *
+     * @return The iterator
+     */
     array_iterator begin()
     {
         return array_iterator(*this, 0);
     }
 
+    /**
+     * Returns an iterator to the end of the array
+     *
+     * @return The iterator
+     */
     array_iterator end()
     {
         return array_iterator(*this, N);
     }
 
+    /**
+     * Returns an iterator to the begin of the array
+     *
+     * @return The iterator
+     */
     const_array_iterator begin() const
     {
         return const_array_iterator(*this, 0);
     }
 
+    /**
+     * Returns an iterator to the end of the array
+     *
+     * @return The iterator
+     */
     const_array_iterator end() const
     {
         return const_array_iterator(*this, N);
