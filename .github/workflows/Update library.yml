@@ -28,7 +28,7 @@ jobs:
           git config --global user.email "timtim3001@gmail.com"
           git add -A
           git commit -m "Updated version to ${{github.ref_name}}"
-          git push
+          git push origin HEAD:master
 
       - name: Log into platformio
         run: |
