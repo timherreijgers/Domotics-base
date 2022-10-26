@@ -73,12 +73,12 @@ public:
         size_t index = 0;
         size_t arrayIndex = 0;
 
-        char * token = strtok(data, &m_delimiter);
+        char * token = strtok(data, m_delimiter.data());
 
         while(token != nullptr)
         {
             index += m_parsingFunctions[arrayIndex++](token, buffer + index);
-            token = strtok(nullptr, &m_delimiter);
+            token = strtok(nullptr, m_delimiter.data());
         }
 
         memcpy(&holder, buffer, sizeof(holder));
