@@ -12,6 +12,14 @@
 #include <IPAddress.h>
 
 /**
+ * Application callback which is called when disconnected from the MQTT broker. This callback should be
+ * implemented in the application to handle disconnects. These disconnects can happen, for example, when
+ * the DHCP lease ends and a new IP must be requested. When this happens the function \ref Mqtt::connect
+ * should be called again to reinitialize and reconnect.
+ */
+void mqttDisconnected();
+
+/**
  * Application callback, which is called when an MQTT message is received. This callback should
  * be implemented in the application to handle received messages. If this is not required, the callback
  * doens't have to be implemented. 
