@@ -1,0 +1,39 @@
+name: Update library version in library.json and upload to platformio
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  Update-Library:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade platformio
+      - name: Update version
+        run: |
+          find library.json -type f -exec sed -i "s/\"version.*,/\"version\": \"1.0.0\",/g" {} \;
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "timherreijgers"
+          git config --global user.email "timtim3001@gmail.com"
+          git add -A
+          git commit -m "Updated version to ${{github.ref_name}}"
+          git push
+
+      - name: Log into platformio
+        run: |
+          pio account login -u ${{secrets.PIO_USERNAME}} -p ${{secrets.PIO_PASSWORD}}
+
+      - name: Add to platformio registry
+        run: |
+          pio pkg publish --no-interactive
