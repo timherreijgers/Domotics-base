@@ -37,8 +37,23 @@ TEST_F(ArrayTest, AccessingItemUsingAtWorksCorrectly)
     ASSERT_EQ(m_array[2], m_array.at(2));
 }
 
-TEST_F(ArrayTest, AccessingFirstElementUsingRefenceOperatorWorksCorrectly)
+TEST_F(ArrayTest, AccessingFirstElementUsingDataFunctionWorksCorrectly)
 {
     m_array[2] = 1000000;
-    ASSERT_EQ(m_array[2], *((&m_array) + 2));
+    ASSERT_EQ(m_array[2], *((m_array.data()) + 2));
+}
+
+TEST_F(ArrayTest, ArraySupportsRangeBasedForLoop)
+{
+    for(const auto & _ : m_array)
+    {
+
+    }
+}
+
+TEST_F(ArrayTest, ConstArraySupportsRangeBasedForLoop)
+{
+    const Data::Array<int, 5> array{};
+
+    for(const auto & _ : array) {}
 }

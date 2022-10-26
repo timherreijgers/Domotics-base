@@ -68,5 +68,4 @@ __attribute__((weak)) void mqttMessageReceived(const char * topic, const uint8_t
 
 __attribute__((weak)) void mqttDisconnected()
 {
-
 }

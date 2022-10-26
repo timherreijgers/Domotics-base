@@ -3,7 +3,39 @@
 
 #include <stddef.h>
 
+#include <array>
+
 namespace Data {
+
+template<typename T, typename C>
+class ArrayIterator
+{
+public:
+    ArrayIterator(C& array, const size_t index) :
+        m_array(array), m_index(index)
+    {
+    }
+
+    bool operator !=(const ArrayIterator & other) const
+    {
+        return m_index != other.m_index;
+    }
+
+    const T & operator *() const
+    {
+        return m_array[m_index];
+    }
+
+    const ArrayIterator & operator++()
+    {
+        ++m_index;
+        return *this;
+    }
+
+private:
+    size_t m_index;
+    C& m_array;
+};
 
 /**
  *
@@ -40,7 +72,19 @@ public:
      * @param index Index to access
      * @return Data in element.
      */
-    T & operator[](size_t index)
+    [[nodiscard]] T & operator[](size_t index)
+    {
+        return at(index);
+    }
+
+    /**
+     * Accesses an element in the array. The index is not checked to be within bounds. This operator can
+     * be used to either read or write to an element.
+     *
+     * @param index Index to access
+     * @return Data in element.
+     */
+    [[nodiscard]] const T & operator[](size_t index) const
     {
         return at(index);
     }
@@ -50,9 +94,19 @@ public:
      *
      * @return A pointer pointing to the first element
      */
-    T * operator&()
+    [[nodiscard]] T * data()
     {
-        return data;
+        return m_data;
+    }
+
+    /**
+     * Gets a pointer pointing to the first element of the array.
+     *
+     * @return A pointer pointing to the first element
+     */
+    [[nodiscard]] const T * data() const
+    {
+        return m_data;
     }
 
     /**
@@ -64,7 +118,19 @@ public:
      */
     [[nodiscard]] T & at(size_t index)
     {
-        return data[index];
+        return m_data[index];
+    }
+
+    /**
+     * Accesses an element in the array. The index is not checked to be within bounds. This function can
+     * be used to either read or write to an element.
+     *
+     * @param index Index to access
+     * @return Data in element.
+     */
+    [[nodiscard]] const T & at(size_t index) const
+    {
+        return m_data[index];
     }
 
     /**
@@ -76,8 +142,31 @@ public:
     {
         return N;
     }
+
+    using array_iterator = ArrayIterator<T, Array<T, N>>;
+    using const_array_iterator = ArrayIterator<T, const Array<T, N>>;
+
+    array_iterator begin()
+    {
+        return array_iterator(*this, 0);
+    }
+
+    array_iterator end()
+    {
+        return array_iterator(*this, N);
+    }
+
+    const_array_iterator begin() const
+    {
+        return const_array_iterator(*this, 0);
+    }
+
+    const_array_iterator end() const
+    {
+        return const_array_iterator(*this, N);
+    }
 private:
-    T data[N];
+    T m_data[N];
 };
 
 } // namespace Data
