@@ -7,7 +7,6 @@ Mqtt::Mqtt(const char * name, Client & client) :
     m_name(name)
 {
     m_mqttClient = PubSubClient(client);
-    m_mqttClient.setBufferSize(512);
 }
 
 Mqtt::~Mqtt()
@@ -51,7 +50,8 @@ bool Mqtt::loop()
     {
         DEBUG_PRINT("Not connected, error code: ");
         DEBUG_PRINTLN(m_mqttClient.state());
-        m_mqttClient.connect(m_name);
+        mqttDisconnected();
+        return false;
     }
 
     return m_mqttClient.loop();
@@ -64,4 +64,9 @@ static void onMessageReceived(char * topic, uint8_t * payload, unsigned int leng
 
 __attribute__((weak)) void mqttMessageReceived(const char * topic, const uint8_t * payload, uint32_t length)
 {
+}
+
+__attribute__((weak)) void mqttDisconnected()
+{
+
 }
