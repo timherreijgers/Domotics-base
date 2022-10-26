@@ -7,7 +7,6 @@ Mqtt::Mqtt(const char * name, Client & client) :
     m_name(name)
 {
     m_mqttClient = PubSubClient(client);
-    m_mqttClient.setBufferSize(512);
 }
 
 Mqtt::~Mqtt()
