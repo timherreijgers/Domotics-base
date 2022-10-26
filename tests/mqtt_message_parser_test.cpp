@@ -13,9 +13,12 @@ enum class test_enum
 
 test_enum parseTestEnum(const char * str)
 {
-    if(strcmp(str, "enum_value_1") == 0) return test_enum::enum_value_1;
-    if(strcmp(str, "enum_value_2") == 0) return test_enum::enum_value_2;
-    if(strcmp(str, "enum_value_3") == 0) return test_enum::enum_value_3;
+    if (strcmp(str, "enum_value_1") == 0)
+        return test_enum::enum_value_1;
+    if (strcmp(str, "enum_value_2") == 0)
+        return test_enum::enum_value_2;
+    if (strcmp(str, "enum_value_3") == 0)
+        return test_enum::enum_value_3;
     return test_enum::invalid;
 }
 
@@ -28,7 +31,6 @@ struct TestStruct
 
 class MqttMessageParserTest : public ::testing::Test
 {
-
 };
 
 TEST_F(MqttMessageParserTest, messageConsistingOfOneIntParsesReturnsInt)

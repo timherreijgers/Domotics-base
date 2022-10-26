@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+#include "generic_data_iterator.h"
+
 namespace Data {
 
 /**
@@ -26,6 +28,16 @@ class Array
 {
     static_assert(N > 0, "Size N has to be bigger than 0");
 public:
+    /**
+     * Definition of modifiable iterator
+     */
+    using array_iterator = CollectionIterator<T, Array<T, N>>;
+
+    /**
+     * Definition of unmodifiable iterator
+     */
+    using const_array_iterator = CollectionIterator<T, const Array<T, N>>;
+
     Array() = default;
     ~Array() = default;
     Array(const Array &) = delete;
@@ -40,7 +52,19 @@ public:
      * @param index Index to access
      * @return Data in element.
      */
-    T & operator[](size_t index)
+    [[nodiscard]] T & operator[](size_t index)
+    {
+        return at(index);
+    }
+
+    /**
+     * Accesses an element in the array. The index is not checked to be within bounds. This operator can
+     * be used to either read or write to an element.
+     *
+     * @param index Index to access
+     * @return Data in element.
+     */
+    [[nodiscard]] const T & operator[](size_t index) const
     {
         return at(index);
     }
@@ -50,9 +74,19 @@ public:
      *
      * @return A pointer pointing to the first element
      */
-    T * operator&()
+    [[nodiscard]] T * data()
     {
-        return data;
+        return m_data;
+    }
+
+    /**
+     * Gets a pointer pointing to the first element of the array.
+     *
+     * @return A pointer pointing to the first element
+     */
+    [[nodiscard]] const T * data() const
+    {
+        return m_data;
     }
 
     /**
@@ -64,7 +98,19 @@ public:
      */
     [[nodiscard]] T & at(size_t index)
     {
-        return data[index];
+        return m_data[index];
+    }
+
+    /**
+     * Accesses an element in the array. The index is not checked to be within bounds. This function can
+     * be used to either read or write to an element.
+     *
+     * @param index Index to access
+     * @return Data in element.
+     */
+    [[nodiscard]] const T & at(size_t index) const
+    {
+        return m_data[index];
     }
 
     /**
@@ -76,8 +122,48 @@ public:
     {
         return N;
     }
+
+    /**
+     * Returns an iterator to the begin of the array
+     *
+     * @return The iterator
+     */
+    array_iterator begin()
+    {
+        return array_iterator(*this, 0);
+    }
+
+    /**
+     * Returns an iterator to the end of the array
+     *
+     * @return The iterator
+     */
+    array_iterator end()
+    {
+        return array_iterator(*this, N);
+    }
+
+    /**
+     * Returns an iterator to the begin of the array
+     *
+     * @return The iterator
+     */
+    const_array_iterator begin() const
+    {
+        return const_array_iterator(*this, 0);
+    }
+
+    /**
+     * Returns an iterator to the end of the array
+     *
+     * @return The iterator
+     */
+    const_array_iterator end() const
+    {
+        return const_array_iterator(*this, N);
+    }
 private:
-    T data[N];
+    T m_data[N];
 };
 
 } // namespace Data
