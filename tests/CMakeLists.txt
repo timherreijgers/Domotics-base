@@ -7,7 +7,7 @@ add_executable(${PROJECT_NAME}
         string_append_unsafe_test.cpp
         string_append_test.cpp
         array_test.cpp
-        )
+        logger_test.cpp)
 
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
