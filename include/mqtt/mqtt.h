@@ -76,14 +76,14 @@ public:
 	bool subscribeToTopic(const char *topic);
 
 	/**
-	 * Connect to the broker using the specified broker IP address. 
+	 * Connect to the broker using the specified broker IP address.
 	 * If connecting to the broker succeeds, this function will return true. If not, it will return false.
-	 * 
+	 *
 	 * \param brokerIp The broker IP address
-	 * 
+	 *
 	 * \returns True if successful, false otherwise
 	 */
-	virtual bool connect(const IPAddress &brokerIp) = 0;
+    bool connect(const IPAddress &brokerIp);
 
 	/**
 	 * Poll function for MQTT. Calling this function periodically is required to keep the connection alive. It's also 
@@ -93,16 +93,6 @@ public:
 	 */
 	bool loop();
 protected:
-
-	/**
-	 * Connect to the broker using the initialized hardware interface. 
-	 * If connecting to the broker succeeds, this function will return true. If not, it will return false.
-	 * 
-	 * \param brokerIp The broker IP address
-	 * 
-	 * \returns True if successful, false otherwise
-	 */
-	bool connectToBroker(const IPAddress &brokerIp);
 
 	/**
 	 * Mqtt constructor initializing the mqtt middleware. It takes the name which is required for the mqtt broker, as well as
@@ -115,6 +105,25 @@ protected:
 	 * \param client The client 
 	 */
     Mqtt(const char *name, Client &client);
+private:
+    /**
+	 * Connect to the broker using the initialized hardware interface.
+	 * If connecting to the broker succeeds, this function will return true. If not, it will return false.
+	 *
+	 * \param brokerIp The broker IP address
+	 *
+	 * \returns True if successful, false otherwise
+	 */
+    bool connectToBroker(const IPAddress & brokerIp);
+
+    /**
+     * Initializes the connection with the actual internet interface if it's not initialized. If the initialization
+     * succeeds, or if it's already initialized, it returns true. If not, it returns false.
+     *
+     * @return True if successful, false otherwise
+     */
+    virtual bool initializeIfNotInitialized() = 0;
+
 private:
     const char *m_name;
     PubSubClient m_mqttClient;

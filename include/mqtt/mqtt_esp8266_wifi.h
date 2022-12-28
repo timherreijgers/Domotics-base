@@ -31,10 +31,11 @@ public:
 	 * \param password Network password
 	 */
 	MqttEsp8266Wifi(const char *name, Stream *wifiStream, const char *ssid, const char *password);
-
-	bool connect(const IPAddress &brokerIp) override;
+private:
+    bool initializeIfNotInitialized() override;
 
 private:
+    bool m_initialized;
 	const char *_ssid;
 	const char *_password;
 	Stream *_stream;
