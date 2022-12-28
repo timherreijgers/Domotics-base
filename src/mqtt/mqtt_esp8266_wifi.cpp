@@ -10,7 +10,7 @@ MqttEsp8266Wifi::MqttEsp8266Wifi(const char * name, Stream * wifiStream, const c
 
 bool MqttEsp8266Wifi::initializeIfNotInitialized()
 {
-    if(m_initialized)
+    if (m_initialized)
         return true;
 
     WiFi.init(_stream);

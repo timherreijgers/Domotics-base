@@ -14,7 +14,7 @@ MqttEnc28J60Ethernet::MqttEnc28J60Ethernet(const char * name, uint8_t mac[6], in
 
 bool MqttEnc28J60Ethernet::initializeIfNotInitialized()
 {
-    if(m_initialized)
+    if (m_initialized)
         return true;
 
     Ethernet.begin(_mac);
