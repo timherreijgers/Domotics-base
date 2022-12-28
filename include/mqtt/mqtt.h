@@ -106,8 +106,22 @@ protected:
 	 */
     Mqtt(const char *name, Client &client);
 private:
+    /**
+	 * Connect to the broker using the initialized hardware interface.
+	 * If connecting to the broker succeeds, this function will return true. If not, it will return false.
+	 *
+	 * \param brokerIp The broker IP address
+	 *
+	 * \returns True if successful, false otherwise
+	 */
     bool connectToBroker(const IPAddress & brokerIp);
 
+    /**
+     * Initializes the connection with the actual internet interface if it's not initialized. If the initialization
+     * succeeds, or if it's already initialized, it returns true. If not, it returns false.
+     *
+     * @return True if successful, false otherwise
+     */
     virtual bool initializeIfNotInitialized() = 0;
 
 private:
