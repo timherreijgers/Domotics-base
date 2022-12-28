@@ -26,8 +26,6 @@ public:
 	 * \param slaveSelectPin The slave select pin
 	 */
 	MqttEnc28J60Ethernet(const char *name, uint8_t mac[6], int slaveSelectPin);
-
-	bool connect(const IPAddress &brokerIp) override;
 private:
     bool initializeIfNotInitialized() override;
 

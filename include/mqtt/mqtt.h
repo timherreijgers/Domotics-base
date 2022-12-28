@@ -83,7 +83,7 @@ public:
 	 *
 	 * \returns True if successful, false otherwise
 	 */
-    bool connect(const IPAddress &brokerIp) = 0;
+    bool connect(const IPAddress &brokerIp);
 
 	/**
 	 * Poll function for MQTT. Calling this function periodically is required to keep the connection alive. It's also 
@@ -106,15 +106,7 @@ protected:
 	 */
     Mqtt(const char *name, Client &client);
 private:
-    /**
-	 * Connect to the broker using the initialized hardware interface.
-	 * If connecting to the broker succeeds, this function will return true. If not, it will return false.
-	 *
-	 * \param brokerIp The broker IP address
-	 *
-	 * \returns True if successful, false otherwise
-     */
-    bool connectToBroker(const IPAddress &brokerIp);
+    bool connectToBroker(const IPAddress & brokerIp);
 
     virtual bool initializeIfNotInitialized() = 0;
 
