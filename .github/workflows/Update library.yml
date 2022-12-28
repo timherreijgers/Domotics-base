@@ -30,7 +30,7 @@ jobs:
           git switch master
           git add -A
           git commit -m "Updated version to ${{github.ref_name}}"
-          git push
+          git push --force
 
       - name: Log into platformio
         run: |
