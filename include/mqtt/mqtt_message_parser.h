@@ -7,8 +7,9 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <inttypes.h>
 
-using MessageParserParseFunction = int(*)(const char * str, char * buffer);
+using MessageParserParseFunction = int(*)(const char * str, uint8_t * buffer);
 
 /**
  * \brief MQTT message parser
@@ -66,14 +67,18 @@ public:
      * \param data The input string to parse
      * \return The parsed object
      */
-    T parse(char * data)
+    T parse(const char * data)
     {
         T holder{};
-        char buffer[sizeof(T)] = {0x00};
-        size_t index = 0;
-        size_t arrayIndex = 0;
 
-        char * token = strtok(data, m_delimiter.data());
+        char * dataBuffer = new char[strlen(data)];
+        strcpy(dataBuffer, data);
+
+        auto * buffer = reinterpret_cast<uint8_t *>(&holder);
+        uint8_t index = 0;
+        uint8_t arrayIndex = 0;
+
+        char * token = strtok(dataBuffer, m_delimiter.data());
 
         while(token != nullptr)
         {
@@ -81,7 +86,6 @@ public:
             token = strtok(nullptr, m_delimiter.data());
         }
 
-        memcpy(&holder, buffer, sizeof(holder));
         return holder;
     }
 
