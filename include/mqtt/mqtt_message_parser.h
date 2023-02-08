@@ -71,7 +71,7 @@ public:
     {
         T holder{};
 
-        char * dataBuffer = new char[strlen(data)];
+        char * dataBuffer = new char[strlen(data) + 1];
         strcpy(dataBuffer, data);
 
         auto * buffer = reinterpret_cast<uint8_t *>(&holder);
