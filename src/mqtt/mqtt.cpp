@@ -47,12 +47,14 @@ bool Mqtt::subscribeToTopic(const char * topic)
 bool Mqtt::connect(const IPAddress & brokerIp)
 {
     const auto initialized = initializeIfNotInitialized();
+    if(!initialized)
+        return false;
 
     DEBUG_PRINTLN("Connecting to MQTT broker");
     const auto connected = connectToBroker(brokerIp);
     DEBUG_PRINTLN("Connected to broker");
 
-    return initialized & connected;
+    return connected;
 }
 
 bool Mqtt::loop()
