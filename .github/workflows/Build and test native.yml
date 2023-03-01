@@ -19,11 +19,6 @@ jobs:
         sudo apt-get update &&
         sudo apt-get install -y cmake
 
-    - name: List files
-      run:
-        ls &&
-        ls tests
-
     - name: Configure CMake
       run: 
         cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S .

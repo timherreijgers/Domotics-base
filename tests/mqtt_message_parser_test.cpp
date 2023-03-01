@@ -116,3 +116,66 @@ TEST_F(MqttMessageParserTest, messageConsistingOfOneIntAndOneUnknownEnumWithComm
     ASSERT_EQ(data.value1, 100);
     ASSERT_EQ(data.value2, test_enum::invalid);
 }
+
+TEST_F(MqttMessageParserTest, parsingFunctionUint8WorksCorrectly)
+{
+    MqttMessageParser<uint8_t, 1> parser(',', ParsingFunctions::parseUint8);
+
+    ASSERT_EQ(10, parser.parse("10"));
+    ASSERT_EQ(255, parser.parse("356"));
+    ASSERT_EQ(0, parser.parse("-100"));
+}
+
+TEST_F(MqttMessageParserTest, parsingFunctionUint16WorksCorrectly)
+{
+    MqttMessageParser<uint16_t, 1> parser(',', ParsingFunctions::parseUint16);
+
+    ASSERT_EQ(2784, parser.parse("2784"));
+    ASSERT_EQ(65535, parser.parse("75536"));
+    ASSERT_EQ(0, parser.parse("-75536"));
+}
+
+TEST_F(MqttMessageParserTest, parsingFunctionUint32WorksCorrectly)
+{
+    MqttMessageParser<uint32_t, 1> parser(',', ParsingFunctions::parseUint32);
+
+    ASSERT_EQ(75536, parser.parse("75536"));
+    ASSERT_EQ(4294967295, parser.parse("5294977296"));
+    ASSERT_EQ(0, parser.parse("-5294977296"));
+}
+
+TEST_F(MqttMessageParserTest, parsingFunctionInt8WorksCorrectly)
+{
+    MqttMessageParser<int8_t, 1> parser(',', ParsingFunctions::parseInt8);
+
+    ASSERT_EQ(10, parser.parse("10"));
+    ASSERT_EQ(127, parser.parse("356"));
+    ASSERT_EQ(-128, parser.parse("-356"));
+}
+
+TEST_F(MqttMessageParserTest, parsingFunctionCharWorksCorrectly)
+{
+    MqttMessageParser<int8_t, 1> parser(',', ParsingFunctions::parseChar);
+
+    ASSERT_EQ(10, parser.parse("10"));
+    ASSERT_EQ(127, parser.parse("356"));
+    ASSERT_EQ(-128, parser.parse("-356"));
+}
+
+TEST_F(MqttMessageParserTest, parsingFunctionInt16WorksCorrectly)
+{
+    MqttMessageParser<int16_t, 1> parser(',', ParsingFunctions::parseInt16);
+
+    ASSERT_EQ(2784, parser.parse("2784"));
+    ASSERT_EQ(32767, parser.parse("75536"));
+    ASSERT_EQ(-32768, parser.parse("-75536"));
+}
+
+TEST_F(MqttMessageParserTest, parsingFunctionInt32WorksCorrectly)
+{
+    MqttMessageParser<int32_t, 1> parser(',', ParsingFunctions::parseInt32);
+
+    ASSERT_EQ(75536, parser.parse("75536"));
+    ASSERT_EQ(2147483647, parser.parse("8294977296"));
+    ASSERT_EQ(-2147483648, parser.parse("-8294977296"));
+}
