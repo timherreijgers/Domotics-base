@@ -153,6 +153,15 @@ TEST_F(MqttMessageParserTest, parsingFunctionInt8WorksCorrectly)
     ASSERT_EQ(-128, parser.parse("-356"));
 }
 
+TEST_F(MqttMessageParserTest, parsingFunctionCharWorksCorrectly)
+{
+    MqttMessageParser<int8_t, 1> parser(',', ParsingFunctions::parseChar);
+
+    ASSERT_EQ(10, parser.parse("10"));
+    ASSERT_EQ(127, parser.parse("356"));
+    ASSERT_EQ(-128, parser.parse("-356"));
+}
+
 TEST_F(MqttMessageParserTest, parsingFunctionInt16WorksCorrectly)
 {
     MqttMessageParser<int16_t, 1> parser(',', ParsingFunctions::parseInt16);
@@ -161,7 +170,6 @@ TEST_F(MqttMessageParserTest, parsingFunctionInt16WorksCorrectly)
     ASSERT_EQ(32767, parser.parse("75536"));
     ASSERT_EQ(-32768, parser.parse("-75536"));
 }
-
 
 TEST_F(MqttMessageParserTest, parsingFunctionInt32WorksCorrectly)
 {
