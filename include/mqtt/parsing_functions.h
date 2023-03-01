@@ -83,7 +83,7 @@ int32_t parseInt16(const char * str, uint8_t * buffer);
 int32_t parseInt32(const char * str, uint8_t * buffer);
 
 /**
- * Parses an float from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
+ * Parses a float from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
  *
  * @param str The input string
  * @param buffer The destination buffer
