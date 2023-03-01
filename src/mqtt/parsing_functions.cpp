@@ -43,12 +43,12 @@ inline int32_t genericSignedIntParsingFunction(const char *str, uint8_t * buffer
     const auto value = strtol(str, NULL, 10);
 
     if(value > maximumValue)
-        return addToBuffer(maximumValue, buffer);
+        return Internal::addToBuffer(maximumValue, buffer);
 
     if(value < minimumValue)
-        return addToBuffer(minimumValue, buffer);
+        return Internal::addToBuffer(minimumValue, buffer);
 
-    return addToBuffer(static_cast<T>(value), buffer);
+    return Internal::addToBuffer(static_cast<T>(value), buffer);
 }
 
 template<typename T>
@@ -65,9 +65,9 @@ inline int32_t genericUnsignedIntParsingFunction(const char *str, uint8_t * buff
     const auto value = isValueNegative ? 0 : strtoul(str, NULL, 10);
 
     if(value > maximumValue)
-        return addToBuffer(maximumValue, buffer);
+        return Internal::addToBuffer(maximumValue, buffer);
 
-    return addToBuffer(static_cast<T>(value), buffer);
+    return Internal::addToBuffer(static_cast<T>(value), buffer);
 }
 
 int32_t parseUint8(const char * str, uint8_t * buffer)
@@ -103,7 +103,7 @@ int parseInt32(const char * str, uint8_t * buffer)
 int parseFloat(const char * str, uint8_t * buffer)
 {
     const auto value = (float)atof(str);
-    return addToBuffer(value, buffer);
+    return Internal::addToBuffer(value, buffer);
 }
 
 } // namespace ParsingFunctions
