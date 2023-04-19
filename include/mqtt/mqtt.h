@@ -70,6 +70,15 @@ public:
 	void addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage);
 
 	/**
+	 * Enables status messages when connected and disconnected from the MQTT broker. This function will set the online- and offline messages
+	 * to the default messages of "online" and "offline". The StatusTopic must be a NULL terminated C-style string. Since only a reference
+	 * to this string is saved, this string must outlive the MQTT object.
+	 * 
+	 * \param statusTopic The topic to publish to. 
+	 */
+	void addStatusMessage(const char * statusTopic);
+
+	/**
 	 * Publishes a payload in a topic. As the payload is in the style of a C-style string, the payload has to be 
 	 * NULL terminated. If publishing the payload succeeds, this function will return true. If not, it will return false.
 	 * 
