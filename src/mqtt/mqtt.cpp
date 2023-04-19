@@ -1,6 +1,8 @@
 #include "mqtt/mqtt.h"
 #include "domotics_debug.h"
 
+#include <string.h>
+
 static void onMessageReceived(char * topic, uint8_t * payload, unsigned int length);
 
 Mqtt::Mqtt(const char * name, Client & client) :
@@ -13,6 +15,13 @@ Mqtt::~Mqtt()
 {
     if (m_mqttClient.connected())
         m_mqttClient.disconnect();
+}
+
+bool Mqtt::addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage)
+{
+    m_statusTopic = statusTopic;
+    m_onlineStatusMessage = onlineStatusMessage;
+    m_offlineStatusMessage = offlineStatusMessage;
 }
 
 bool Mqtt::publishOnTopic(const char * topic, const char * payload)
@@ -29,12 +38,25 @@ bool Mqtt::connectToBroker(const IPAddress & brokerIp)
     m_mqttClient.setCallback(onMessageReceived);
     m_mqttClient.setKeepAlive(5);
 
-    while (!m_mqttClient.connect(m_name))
+    if(m_statusTopic == nullptr)
     {
-        DEBUG_PRINT(".");
-        delay(1000);
+        while (!m_mqttClient.connect(m_name))
+        {
+            DEBUG_PRINT(".");
+            delay(1000);
+        }
+        DEBUG_PRINTLN("");
     }
-    DEBUG_PRINTLN("");
+    else
+    {
+        while (!m_mqttClient.connect(m_name, m_statusTopic, 0, 1, m_offlineStatusMessage))
+        {
+            DEBUG_PRINT(".");
+            delay(1000);
+        }
+        DEBUG_PRINTLN("");
+        publishOnTopic(m_statusTopic, m_onlineStatusMessage);
+    }
 
     return true;
 }
