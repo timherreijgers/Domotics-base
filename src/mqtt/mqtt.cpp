@@ -17,7 +17,7 @@ Mqtt::~Mqtt()
         m_mqttClient.disconnect();
 }
 
-bool Mqtt::addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage)
+void Mqtt::addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage)
 {
     m_statusTopic = statusTopic;
     m_onlineStatusMessage = onlineStatusMessage;
