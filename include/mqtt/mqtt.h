@@ -58,7 +58,16 @@ public:
 	Mqtt & operator =(Mqtt &) = delete;
 	Mqtt & operator =(Mqtt &&) = delete;
 
-	bool addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage);
+	/**
+	 * Enables status messages when connected and disconnected from the MQTT broker. All strings are C-style strings and must
+	 * be NULL terminated. Since this function will save a reference to the string the string will have to outlive the MQTT object.
+	 * The onlineStatusMessage will be automatically published on the next (and all following) connect(s). 
+	 * 
+	 * \param statusTopic The topic to publish to. 
+	 * \param onlineStatusMessage The message to publish on first connect
+	 * \param offlineStatusMessage The message to publish on disconnect
+	 */
+	void addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage);
 
 	/**
 	 * Publishes a payload in a topic. As the payload is in the style of a C-style string, the payload has to be 
