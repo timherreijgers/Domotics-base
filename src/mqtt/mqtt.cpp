@@ -24,6 +24,11 @@ void Mqtt::addStatusMessage(const char * statusTopic, const char * onlineStatusM
     m_offlineStatusMessage = offlineStatusMessage;
 }
 
+void Mqtt::addStatusMessage(const char * statusTopic)
+{
+    addStatusMessage(statusTopic, "online", "offline");
+}
+
 bool Mqtt::publishOnTopic(const char * topic, const char * payload)
 {
     if (!m_mqttClient.connected())
