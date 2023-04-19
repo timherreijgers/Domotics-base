@@ -6,27 +6,19 @@ namespace ParsingFunctions {
 template<typename T>
 inline constexpr bool isSigned()
 {
-    T t{};
-    return static_cast<T>(t - 1) < t;
+    return static_cast<T>(T{} - 1) < T{};
 }
 
 template<typename T>
 inline constexpr T getMaximumValue()
 {
-    if(isSigned<T>())
-        return ~static_cast<T>(1 << sizeof(T) * 8 - 1);
-
-    constexpr T t{};
-    return ~t;
+    return isSigned<T>() ? ~static_cast<T>(1 << sizeof(T) * 8 - 1) : ~T{};
 }
 
 template<typename T>
 inline constexpr T getMinimumValue()
 {
-    if(isSigned<T>())
-        return static_cast<T>(1 << sizeof(T) * 8 - 1);
-
-    return 0;
+    return isSigned<T>() ? static_cast<T>(1 << sizeof(T) * 8 - 1) : 0;
 }
 
 template<typename T>
@@ -95,12 +87,12 @@ int32_t parseInt16(const char * str, uint8_t * buffer)
     return genericSignedIntParsingFunction<int16_t>(str, buffer);
 }
 
-int parseInt32(const char * str, uint8_t * buffer)
+int32_t parseInt32(const char * str, uint8_t * buffer)
 {
     return genericSignedIntParsingFunction<int32_t>(str, buffer);
 }
 
-int parseFloat(const char * str, uint8_t * buffer)
+int32_t parseFloat(const char * str, uint8_t * buffer)
 {
     const auto value = (float)atof(str);
     return Internal::addToBuffer(value, buffer);
