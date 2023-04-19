@@ -53,6 +53,12 @@ class Mqtt
 {
 public:	
     ~Mqtt();
+	Mqtt(Mqtt &) = delete;
+	Mqtt(Mqtt &&) = delete;
+	Mqtt & operator =(Mqtt &) = delete;
+	Mqtt & operator =(Mqtt &&) = delete;
+
+	bool addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage);
 
 	/**
 	 * Publishes a payload in a topic. As the payload is in the style of a C-style string, the payload has to be 
@@ -126,6 +132,9 @@ private:
 
 private:
     const char *m_name;
+	char *m_statusTopic = nullptr;
+	char *m_onlineStatusMessage = nullptr;
+	char *m_offlineStatusMessage = nullptr;
     PubSubClient m_mqttClient;
 };
 
