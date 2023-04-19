@@ -81,13 +81,15 @@ public:
 	/**
 	 * Publishes a payload in a topic. As the payload is in the style of a C-style string, the payload has to be 
 	 * NULL terminated. If publishing the payload succeeds, this function will return true. If not, it will return false.
+	 * The payload can be both set to retain or not retain. Of these, the latter is the default. 
 	 * 
 	 * \param topic The topic to publish to
 	 * \param payload The payload to publish
+	 * \param retain Whether the message should be retained
 	 * 
 	 * \returns True if successful, false otherwise
 	 */
-    bool publishOnTopic(const char *topic, const char *payload);
+    bool publishOnTopic(const char *topic, const char *payload, bool retain = false);
 
 	/**
 	 * Subscribes to a topic. To receive the messages, the function ::mqttMessageReceived(const char *, const uint8_t *, uint32_t) must be implemented.
