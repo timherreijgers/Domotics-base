@@ -29,12 +29,12 @@ void Mqtt::addStatusMessage(const char * statusTopic)
     addStatusMessage(statusTopic, "online", "offline");
 }
 
-bool Mqtt::publishOnTopic(const char * topic, const char * payload)
+bool Mqtt::publishOnTopic(const char * topic, const char * payload, bool retain)
 {
     if (!m_mqttClient.connected())
         return false;
 
-    return m_mqttClient.publish(topic, payload);
+    return m_mqttClient.publish(topic, payload, retain);
 }
 
 bool Mqtt::connectToBroker(const IPAddress & brokerIp)
@@ -60,7 +60,7 @@ bool Mqtt::connectToBroker(const IPAddress & brokerIp)
             delay(1000);
         }
         DEBUG_PRINTLN("");
-        publishOnTopic(m_statusTopic, m_onlineStatusMessage);
+        publishOnTopic(m_statusTopic, m_onlineStatusMessage, true);
     }
 
     return true;
