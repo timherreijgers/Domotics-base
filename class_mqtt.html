@@ -77,8 +77,24 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a82438f266387890118c104dd474286d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#a82438f266387890118c104dd474286d1">publishOnTopic</a> (const char *topic, const char *payload)</td></tr>
-<tr class="separator:a82438f266387890118c104dd474286d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ef8250a8f17d4a5312bafbe5e26409d"><td class="memItemLeft" align="right" valign="top"><a id="a3ef8250a8f17d4a5312bafbe5e26409d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Mqtt</b> (<a class="el" href="class_mqtt.html">Mqtt</a> &amp;)=delete</td></tr>
+<tr class="separator:a3ef8250a8f17d4a5312bafbe5e26409d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd4ffa769031551fa3477d73cb33db4e"><td class="memItemLeft" align="right" valign="top"><a id="acd4ffa769031551fa3477d73cb33db4e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Mqtt</b> (<a class="el" href="class_mqtt.html">Mqtt</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:acd4ffa769031551fa3477d73cb33db4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4134a0986f3fc7e3911fa39dad76fc7c"><td class="memItemLeft" align="right" valign="top"><a id="a4134a0986f3fc7e3911fa39dad76fc7c"></a>
+<a class="el" href="class_mqtt.html">Mqtt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="class_mqtt.html">Mqtt</a> &amp;)=delete</td></tr>
+<tr class="separator:a4134a0986f3fc7e3911fa39dad76fc7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8923cb6bb24c788c991e07da1f72c1cc"><td class="memItemLeft" align="right" valign="top"><a id="a8923cb6bb24c788c991e07da1f72c1cc"></a>
+<a class="el" href="class_mqtt.html">Mqtt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="class_mqtt.html">Mqtt</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a8923cb6bb24c788c991e07da1f72c1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c21b6c5cc3ead214f02f1321ea28cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#a89c21b6c5cc3ead214f02f1321ea28cc">addStatusMessage</a> (const char *statusTopic, const char *onlineStatusMessage, const char *offlineStatusMessage)</td></tr>
+<tr class="separator:a89c21b6c5cc3ead214f02f1321ea28cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85d4554e4ca19429c142703c166d7c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#ab85d4554e4ca19429c142703c166d7c2">addStatusMessage</a> (const char *statusTopic)</td></tr>
+<tr class="separator:ab85d4554e4ca19429c142703c166d7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12415e9ac2da7fc05295c1dcab29ab56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#a12415e9ac2da7fc05295c1dcab29ab56">publishOnTopic</a> (const char *topic, const char *payload, bool retain=false)</td></tr>
+<tr class="separator:a12415e9ac2da7fc05295c1dcab29ab56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf93355dee32608181f4474a759e9773"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#aaf93355dee32608181f4474a759e9773">subscribeToTopic</a> (const char *topic)</td></tr>
 <tr class="separator:aaf93355dee32608181f4474a759e9773"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4b9fc0c1a381814e08ccbd9b02d5dee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#ad4b9fc0c1a381814e08ccbd9b02d5dee">connect</a> (const IPAddress &amp;brokerIp)</td></tr>
@@ -144,6 +160,74 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab85d4554e4ca19429c142703c166d7c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab85d4554e4ca19429c142703c166d7c2">&#9670;&nbsp;</a></span>addStatusMessage() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mqtt::addStatusMessage </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>statusTopic</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enables status messages when connected and disconnected from the MQTT broker. This function will set the online- and offline messages to the default messages of "online" and "offline". The StatusTopic must be a NULL terminated C-style string. Since only a reference to this string is saved, this string must outlive the MQTT object.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">statusTopic</td><td>The topic to publish to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a89c21b6c5cc3ead214f02f1321ea28cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89c21b6c5cc3ead214f02f1321ea28cc">&#9670;&nbsp;</a></span>addStatusMessage() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mqtt::addStatusMessage </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>statusTopic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>onlineStatusMessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>offlineStatusMessage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enables status messages when connected and disconnected from the MQTT broker. All strings are C-style strings and must be NULL terminated. Since this function will save a reference to the string the string will have to outlive the MQTT object. The onlineStatusMessage will be automatically published on the next (and all following) connect(s).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">statusTopic</td><td>The topic to publish to. </td></tr>
+    <tr><td class="paramname">onlineStatusMessage</td><td>The message to publish on first connect </td></tr>
+    <tr><td class="paramname">offlineStatusMessage</td><td>The message to publish on disconnect </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad4b9fc0c1a381814e08ccbd9b02d5dee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad4b9fc0c1a381814e08ccbd9b02d5dee">&#9670;&nbsp;</a></span>connect()</h2>
 
@@ -189,8 +273,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a82438f266387890118c104dd474286d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82438f266387890118c104dd474286d1">&#9670;&nbsp;</a></span>publishOnTopic()</h2>
+<a id="a12415e9ac2da7fc05295c1dcab29ab56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12415e9ac2da7fc05295c1dcab29ab56">&#9670;&nbsp;</a></span>publishOnTopic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +289,13 @@ Protected Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>payload</em>&#160;</td>
+          <td class="paramname"><em>payload</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>retain</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -214,11 +304,12 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Publishes a payload in a topic. As the payload is in the style of a C-style string, the payload has to be NULL terminated. If publishing the payload succeeds, this function will return true. If not, it will return false.</p>
+<p>Publishes a payload in a topic. As the payload is in the style of a C-style string, the payload has to be NULL terminated. If publishing the payload succeeds, this function will return true. If not, it will return false. The payload can be both set to retain or not retain. Of these, the latter is the default.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">topic</td><td>The topic to publish to </td></tr>
-    <tr><td class="paramname">payload</td><td>The payload to publish</td></tr>
+    <tr><td class="paramname">payload</td><td>The payload to publish </td></tr>
+    <tr><td class="paramname">retain</td><td>Whether the message should be retained</td></tr>
   </table>
   </dd>
 </dl>
