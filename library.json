@@ -1,6 +1,6 @@
 {
 	"name": "DomoticsBase",
-	"version": "v0.1.6",
+	"version": "0.1.6",
 	"description": "Library containing common code for Domotics projects",
 	"authors":
 	[
