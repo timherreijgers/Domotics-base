@@ -13,7 +13,10 @@ bool MqttEsp8266Wifi::initializeIfNotInitialized()
     if (m_initialized)
         return true;
 
-    WiFi.init(_stream);
+    WiFiEspClass::init(_stream);
+
+    if (WL_DISCONNECTED != WiFi.status())
+        return false;
 
     if (WiFi.begin(_ssid, _password) != WL_CONNECTED)
     {
