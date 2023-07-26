@@ -3,10 +3,12 @@
 
 #include <string.h>
 
+static constexpr uint8_t MAX_ATTEMPTS = 10;
+
 static void onMessageReceived(char * topic, uint8_t * payload, unsigned int length);
 
 Mqtt::Mqtt(const char * name, Client & client) :
-    m_name(name)
+        m_name(name)
 {
     m_mqttClient = PubSubClient(client);
 }
@@ -39,31 +41,29 @@ bool Mqtt::publishOnTopic(const char * topic, const char * payload, bool retain)
 
 bool Mqtt::connectToBroker(const IPAddress & brokerIp)
 {
+    uint8_t attempts = 0;
     m_mqttClient.setServer(brokerIp, 1883);
     m_mqttClient.setCallback(onMessageReceived);
     m_mqttClient.setKeepAlive(5);
 
-    if(m_statusTopic == nullptr)
+    const auto connectFunction = m_statusTopic == nullptr ?
+                                 [](Mqtt * mqtt){return mqtt->m_mqttClient.connect(mqtt->m_name);} :
+                                 [](Mqtt * mqtt){return mqtt->m_mqttClient.connect(mqtt->m_name, mqtt->m_statusTopic, 0, 1, mqtt->m_offlineStatusMessage);};
+
+    while(!connectFunction(this) && attempts < MAX_ATTEMPTS)
     {
-        while (!m_mqttClient.connect(m_name))
-        {
-            DEBUG_PRINT(".");
-            delay(1000);
-        }
-        DEBUG_PRINTLN("");
-    }
-    else
-    {
-        while (!m_mqttClient.connect(m_name, m_statusTopic, 0, 1, m_offlineStatusMessage))
-        {
-            DEBUG_PRINT(".");
-            delay(1000);
-        }
-        DEBUG_PRINTLN("");
-        publishOnTopic(m_statusTopic, m_onlineStatusMessage, true);
+        DEBUG_PRINT(".");
+        delay(1000);
+        attempts++;
     }
 
-    return true;
+    if (attempts >= MAX_ATTEMPTS)
+        return false;
+
+    if(m_statusTopic != nullptr)
+        publishOnTopic(m_statusTopic, m_onlineStatusMessage, true);
+
+    return true
 }
 
 bool Mqtt::subscribeToTopic(const char * topic)
