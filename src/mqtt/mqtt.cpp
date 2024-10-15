@@ -63,7 +63,7 @@ bool Mqtt::connectToBroker(const IPAddress & brokerIp)
     if(m_statusTopic != nullptr)
         publishOnTopic(m_statusTopic, m_onlineStatusMessage, true);
 
-    return true
+    return true;
 }
 
 bool Mqtt::subscribeToTopic(const char * topic)
