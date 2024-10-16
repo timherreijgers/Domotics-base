@@ -2,14 +2,11 @@
 #define __MQTT_MESSAGE_PARSER_H__
 
 #include "data/array.h"
-#include "parsing_functions.h"
-#include "utils/compile_time_checks.h"
 
 #include <inttypes.h>
-#include <stdlib.h>
 #include <string.h>
 
-using MessageParserParseFunction = int (*)(const char * str, uint8_t * buffer);
+using MessageParserParseFunction = uint8_t (*)(const char * str, uint8_t * buffer);
 
 /**
  * \brief MQTT message parser

@@ -1,5 +1,7 @@
-#include "mqtt/mqtt_message_parser.h"
+#include "mqtt/parsing_functions.h"
 #include "utils/compile_time_checks.h"
+
+#include <stdlib.h>
 
 namespace ParsingFunctions {
 
@@ -12,17 +14,17 @@ inline constexpr bool isSigned()
 template <typename T>
 inline constexpr T getMaximumValue()
 {
-    return isSigned<T>() ? ~static_cast<T>(1 << sizeof(T) * 8 - 1) : ~T{};
+    return isSigned<T>() ? ~static_cast<T>(T{1} << sizeof(T) * 8 - 1) : ~T{};
 }
 
 template <typename T>
 inline constexpr T getMinimumValue()
 {
-    return isSigned<T>() ? static_cast<T>(1 << sizeof(T) * 8 - 1) : 0;
+    return isSigned<T>() ? static_cast<T>(T{1} << sizeof(T) * 8 - 1) : 0;
 }
 
 template <typename T>
-inline int32_t genericSignedIntParsingFunction(const char * str, uint8_t * buffer)
+inline uint8_t genericSignedIntParsingFunction(const char * str, uint8_t * buffer)
 {
     static_assert(Utils::CompileTimeChecks::is_same<T, int8_t>::value ||
                       Utils::CompileTimeChecks::is_same<T, int16_t>::value ||
@@ -44,7 +46,7 @@ inline int32_t genericSignedIntParsingFunction(const char * str, uint8_t * buffe
 }
 
 template <typename T>
-inline int32_t genericUnsignedIntParsingFunction(const char * str, uint8_t * buffer)
+inline uint8_t genericUnsignedIntParsingFunction(const char * str, uint8_t * buffer)
 {
     static_assert(Utils::CompileTimeChecks::is_same<T, uint8_t>::value ||
                       Utils::CompileTimeChecks::is_same<T, uint16_t>::value ||
@@ -62,37 +64,37 @@ inline int32_t genericUnsignedIntParsingFunction(const char * str, uint8_t * buf
     return Internal::addToBuffer(static_cast<T>(value), buffer);
 }
 
-int32_t parseUint8(const char * str, uint8_t * buffer)
+uint8_t parseUint8(const char * str, uint8_t * buffer)
 {
     return genericUnsignedIntParsingFunction<uint8_t>(str, buffer);
 }
 
-int32_t parseUint16(const char * str, uint8_t * buffer)
+uint8_t parseUint16(const char * str, uint8_t * buffer)
 {
     return genericUnsignedIntParsingFunction<uint16_t>(str, buffer);
 }
 
-int32_t parseUint32(const char * str, uint8_t * buffer)
+uint8_t parseUint32(const char * str, uint8_t * buffer)
 {
     return genericUnsignedIntParsingFunction<uint32_t>(str, buffer);
 }
 
-int32_t parseInt8(const char * str, uint8_t * buffer)
+uint8_t parseInt8(const char * str, uint8_t * buffer)
 {
     return genericSignedIntParsingFunction<int8_t>(str, buffer);
 }
 
-int32_t parseInt16(const char * str, uint8_t * buffer)
+uint8_t parseInt16(const char * str, uint8_t * buffer)
 {
     return genericSignedIntParsingFunction<int16_t>(str, buffer);
 }
 
-int32_t parseInt32(const char * str, uint8_t * buffer)
+uint8_t parseInt32(const char * str, uint8_t * buffer)
 {
     return genericSignedIntParsingFunction<int32_t>(str, buffer);
 }
 
-int32_t parseFloat(const char * str, uint8_t * buffer)
+uint8_t parseFloat(const char * str, uint8_t * buffer)
 {
     const auto value = static_cast<float>(atof(str));
     return Internal::addToBuffer(value, buffer);
