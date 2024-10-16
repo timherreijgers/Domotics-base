@@ -1,4 +1,5 @@
 #include "mqtt/mqtt_message_parser.h"
+#include "mqtt/parsing_functions.h"
 
 #include <gtest/gtest.h>
 #include <string.h>
