@@ -72,4 +72,5 @@ namespace Utils
 		return appendStrings(buffer, size, args...);
 	}
 }
+
 #endif
