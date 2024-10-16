@@ -1,11 +1,13 @@
-#ifndef __DOMOTICS_UTILS_STRING_LITERAL_H__
-#define __DOMOTICS_UTILS_STRING_LITERAL_H__
+#ifndef __DOMOTICS_DATA_STRING_LITERAL_H__
+#define __DOMOTICS_DATA_STRING_LITERAL_H__
 
 /**
  * \file string_literal.h
  *
  * File containing a simple wrapper for a string_literal
  */
+
+namespace Data {
 
 /**
  * \brief Small wrapper around string literals to enable saving references to them in class members
@@ -22,8 +24,8 @@ public:
      *
      * @param string The string literal
      */
-    explicit string_literal(const char* string)
-        : m_string(string)
+    explicit string_literal(const char * string) :
+        m_string(string)
     {
     }
 
@@ -33,7 +35,7 @@ public:
      *
      * @return The contained string literal
      */
-    [[nodiscard]] auto string() const noexcept -> const char*
+    [[nodiscard]] auto string() const noexcept -> const char *
     {
         return m_string;
     }
@@ -41,12 +43,15 @@ public:
     /**
      * Conversion operator to allow casting back to a raw string pointer
      */
-    [[nodiscard]] explicit constexpr operator const char*() const noexcept
+    [[nodiscard]] explicit constexpr operator const char *() const noexcept
     {
         return m_string;
     }
+
 private:
-    const char* m_string;
+    const char * m_string;
 };
 
-#endif // __DOMOTICS_UTILS_STRING_LITERAL_H__
+} // namespace Data
+
+#endif // __DOMOTICS_DATA_STRING_LITERAL_H__

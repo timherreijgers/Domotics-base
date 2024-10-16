@@ -12,7 +12,7 @@ namespace Data
  * Template class for a data operator. The iterator assumes the collection has the
  * [] operator overloaded to read data from the collection.
  */
-template<typename T, typename Collection>
+template <typename T, typename Collection>
 class CollectionIterator
 {
 public:
@@ -21,12 +21,12 @@ public:
     {
     }
 
-    bool operator !=(const CollectionIterator & other) const
+    bool operator!=(const CollectionIterator & other) const
     {
         return m_index != other.m_index;
     }
 
-    const T & operator *() const
+    const T & operator*() const
     {
         return m_collection[m_index];
     }

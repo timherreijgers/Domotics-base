@@ -11,7 +11,6 @@ AllowShortBlocksOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: WithoutElse  # update when clangformat version allows it
-AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 #AllowShortLambdasOnASingleLine: Inline
 AlwaysBreakAfterDefinitionReturnType: None
@@ -72,7 +71,6 @@ SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 1
 SpacesInContainerLiterals: false
 SpacesInAngles: false
-SpacesInContainerLiterals: false
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false

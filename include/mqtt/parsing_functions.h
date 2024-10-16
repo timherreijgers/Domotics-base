@@ -1,8 +1,8 @@
 #ifndef __PARSING_FUNCTIONS_H__
 #define __PARSING_FUNCTIONS_H__
 
-#include <string.h>
 #include <inttypes.h>
+#include <string.h>
 
 /**
  * Namespace containing predefined parsing functions for the \ref MqttMessageParser
@@ -27,7 +27,7 @@ int addToBuffer(const T & value, uint8_t * buffer)
     return sizeof(value);
 }
 
-}
+} // namespace Internal
 
 /**
  * Parses an uint8 from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
@@ -126,7 +126,7 @@ inline int32_t parseChar(const char * str, uint8_t * buffer)
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-template<typename T, T(* ParsingFunction)(const char * str)>
+template <typename T, T (*ParsingFunction)(const char * str)>
 int parseCustom(const char * str, uint8_t * buffer)
 {
     const auto value = ParsingFunction(str);

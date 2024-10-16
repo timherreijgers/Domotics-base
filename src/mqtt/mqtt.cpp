@@ -8,7 +8,7 @@ static constexpr uint8_t MAX_ATTEMPTS = 10;
 static void onMessageReceived(char * topic, uint8_t * payload, unsigned int length);
 
 Mqtt::Mqtt(const char * name, Client & client) :
-        m_name(name)
+    m_name(name)
 {
     m_mqttClient = PubSubClient(client);
 }
@@ -19,16 +19,16 @@ Mqtt::~Mqtt()
         m_mqttClient.disconnect();
 }
 
-void Mqtt::addStatusMessage(string_literal statusTopic, string_literal onlineStatusMessage, string_literal offlineStatusMessage)
+void Mqtt::addStatusMessage(Data::string_literal statusTopic, Data::string_literal onlineStatusMessage, Data::string_literal offlineStatusMessage)
 {
     m_statusTopic = statusTopic;
     m_onlineStatusMessage = onlineStatusMessage;
     m_offlineStatusMessage = offlineStatusMessage;
 }
 
-void Mqtt::addStatusMessage(string_literal statusTopic)
+void Mqtt::addStatusMessage(Data::string_literal statusTopic)
 {
-    addStatusMessage(statusTopic, string_literal{"online"}, string_literal{"offline"});
+    addStatusMessage(statusTopic, Data::string_literal{"online"}, Data::string_literal{"offline"});
 }
 
 bool Mqtt::publishOnTopic(const char * topic, const char * payload, bool retain)
@@ -49,14 +49,13 @@ bool Mqtt::connectToBroker(const IPAddress & brokerIp)
     const auto hasStatusTopic = strcmp(static_cast<const char *>(m_statusTopic), "") != 0;
 
     const auto connectFunction = !hasStatusTopic ?
-                                 [](Mqtt * mqtt){return mqtt->m_mqttClient.connect(mqtt->m_name);} :
-                                 [](Mqtt * mqtt)
-                                 {
-                                     return mqtt->m_mqttClient.connect(mqtt->m_name, mqtt->m_statusTopic.string(),
-                                         0, true, mqtt->m_offlineStatusMessage.string());
-                                 };
+                                     [](Mqtt * mqtt) { return mqtt->m_mqttClient.connect(mqtt->m_name); } :
+                                     [](Mqtt * mqtt) {
+                                         return mqtt->m_mqttClient.connect(mqtt->m_name, mqtt->m_statusTopic.string(),
+                                                                           0, true, mqtt->m_offlineStatusMessage.string());
+                                     };
 
-    while(!connectFunction(this) && attempts < MAX_ATTEMPTS)
+    while (!connectFunction(this) && attempts < MAX_ATTEMPTS)
     {
         DEBUG_PRINT(".");
         delay(1000);
@@ -66,8 +65,8 @@ bool Mqtt::connectToBroker(const IPAddress & brokerIp)
     if (attempts >= MAX_ATTEMPTS)
         return false;
 
-    if(hasStatusTopic)
-        publishOnTopic(m_statusTopic.string(), m_onlineStatusMessage.string()), true);
+    if (hasStatusTopic)
+        publishOnTopic(m_statusTopic.string(), m_onlineStatusMessage.string(), true);
 
     return true;
 }
@@ -80,7 +79,7 @@ bool Mqtt::subscribeToTopic(const char * topic)
 bool Mqtt::connect(const IPAddress & brokerIp)
 {
     const auto initialized = initializeIfNotInitialized();
-    if(!initialized)
+    if (!initialized)
         return false;
 
     DEBUG_PRINTLN("Connecting to MQTT broker");

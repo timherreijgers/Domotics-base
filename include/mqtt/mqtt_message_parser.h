@@ -2,14 +2,14 @@
 #define __MQTT_MESSAGE_PARSER_H__
 
 #include "data/array.h"
-#include "utils/compile_time_checks.h"
 #include "parsing_functions.h"
+#include "utils/compile_time_checks.h"
 
-#include <string.h>
-#include <stdlib.h>
 #include <inttypes.h>
+#include <stdlib.h>
+#include <string.h>
 
-using MessageParserParseFunction = int(*)(const char * str, uint8_t * buffer);
+using MessageParserParseFunction = int (*)(const char * str, uint8_t * buffer);
 
 /**
  * \brief MQTT message parser
@@ -29,24 +29,23 @@ using MessageParserParseFunction = int(*)(const char * str, uint8_t * buffer);
  * \tparam T The type to parse
  * \tparam ElementCount The number of values in a message
  */
-template<typename T, size_t ElementCount>
+template <typename T, size_t ElementCount>
 class MqttMessageParser
 {
 public:
-
     /**
-	 * MqttMessageParser constructor initializing the mqtt message parser. It takes the delimiter and a list of parsing functions.
+     * MqttMessageParser constructor initializing the mqtt message parser. It takes the delimiter and a list of parsing functions.
      * A few of these message parsing functions are declared within the namespace \ref ParsingFunctions. One of these functions
      * provides an interface for you to implement your own message parsing. The amount of parsing functions must equal
      * the ElementCount template argument. The first parsing function is used for the first value, the second parsing function
      * for the second value, and so on.
-	 *
+     *
      * \tparam Args List of parsing function prototypes.
      *
-	 * \param delimiter Delimiter separating values
+     * \param delimiter Delimiter separating values
      * \param args List of parsing functions
      */
-    template<typename ...Args>
+    template <typename... Args>
     MqttMessageParser(char delimiter, Args... args)
     {
         static_assert(ElementCount == sizeof...(args), "Number of parsing functions doesn't equal the ElementCount");
@@ -80,7 +79,7 @@ public:
 
         char * token = strtok(dataBuffer, m_delimiter.data());
 
-        while(token != nullptr)
+        while (token != nullptr)
         {
             index += m_parsingFunctions[arrayIndex++](token, buffer + index);
             token = strtok(nullptr, m_delimiter.data());
