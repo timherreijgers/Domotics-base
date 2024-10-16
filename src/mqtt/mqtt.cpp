@@ -19,16 +19,16 @@ Mqtt::~Mqtt()
         m_mqttClient.disconnect();
 }
 
-void Mqtt::addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage)
+void Mqtt::addStatusMessage(string_literal statusTopic, string_literal onlineStatusMessage, string_literal offlineStatusMessage)
 {
     m_statusTopic = statusTopic;
     m_onlineStatusMessage = onlineStatusMessage;
     m_offlineStatusMessage = offlineStatusMessage;
 }
 
-void Mqtt::addStatusMessage(const char * statusTopic)
+void Mqtt::addStatusMessage(string_literal statusTopic)
 {
-    addStatusMessage(statusTopic, "online", "offline");
+    addStatusMessage(statusTopic, string_literal{"online"}, string_literal{"offline"});
 }
 
 bool Mqtt::publishOnTopic(const char * topic, const char * payload, bool retain)
@@ -46,9 +46,15 @@ bool Mqtt::connectToBroker(const IPAddress & brokerIp)
     m_mqttClient.setCallback(onMessageReceived);
     m_mqttClient.setKeepAlive(5);
 
-    const auto connectFunction = m_statusTopic == nullptr ?
+    const auto hasStatusTopic = strcmp(static_cast<const char *>(m_statusTopic), "") != 0;
+
+    const auto connectFunction = !hasStatusTopic ?
                                  [](Mqtt * mqtt){return mqtt->m_mqttClient.connect(mqtt->m_name);} :
-                                 [](Mqtt * mqtt){return mqtt->m_mqttClient.connect(mqtt->m_name, mqtt->m_statusTopic, 0, 1, mqtt->m_offlineStatusMessage);};
+                                 [](Mqtt * mqtt)
+                                 {
+                                     return mqtt->m_mqttClient.connect(mqtt->m_name, mqtt->m_statusTopic.string(),
+                                         0, true, mqtt->m_offlineStatusMessage.string());
+                                 };
 
     while(!connectFunction(this) && attempts < MAX_ATTEMPTS)
     {
@@ -60,8 +66,8 @@ bool Mqtt::connectToBroker(const IPAddress & brokerIp)
     if (attempts >= MAX_ATTEMPTS)
         return false;
 
-    if(m_statusTopic != nullptr)
-        publishOnTopic(m_statusTopic, m_onlineStatusMessage, true);
+    if(hasStatusTopic)
+        publishOnTopic(m_statusTopic.string(), m_onlineStatusMessage.string()), true);
 
     return true;
 }

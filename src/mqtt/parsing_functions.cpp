@@ -32,7 +32,7 @@ inline int32_t genericSignedIntParsingFunction(const char *str, uint8_t * buffer
     static constexpr T maximumValue = getMaximumValue<T>();
     static constexpr T minimumValue = getMinimumValue<T>();
 
-    const auto value = strtol(str, NULL, 10);
+    const auto value = strtol(str, nullptr, 10);
 
     if(value > maximumValue)
         return Internal::addToBuffer(maximumValue, buffer);
@@ -54,7 +54,7 @@ inline int32_t genericUnsignedIntParsingFunction(const char *str, uint8_t * buff
     static constexpr T maximumValue = getMaximumValue<T>();
 
     const auto isValueNegative = str[0] == '-';
-    const auto value = isValueNegative ? 0 : strtoul(str, NULL, 10);
+    const auto value = isValueNegative ? 0 : strtoul(str, nullptr, 10);
 
     if(value > maximumValue)
         return Internal::addToBuffer(maximumValue, buffer);
@@ -94,7 +94,7 @@ int32_t parseInt32(const char * str, uint8_t * buffer)
 
 int32_t parseFloat(const char * str, uint8_t * buffer)
 {
-    const auto value = (float)atof(str);
+    const auto value = static_cast<float>(atof(str));
     return Internal::addToBuffer(value, buffer);
 }
 

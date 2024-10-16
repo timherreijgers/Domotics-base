@@ -7,8 +7,10 @@
  * File containing the MQTT middleware
  */
 
+#include "utils/string_literal.h"
+
 #include "PubSubClient.h"
-#include <Arduino.h>
+
 #include <IPAddress.h>
 
 /**
@@ -61,22 +63,23 @@ public:
 	/**
 	 * Enables status messages when connected and disconnected from the MQTT broker. All strings are C-style strings and must
 	 * be NULL terminated. Since this function will save a reference to the string the string will have to outlive the MQTT object.
-	 * The onlineStatusMessage will be automatically published on the next (and all following) connect(s). 
+	 * The easiest way to do this is to use a string literal. The onlineStatusMessage will be automatically published
+	 * on the next (and all following) connect(s).
 	 * 
 	 * \param statusTopic The topic to publish to. 
 	 * \param onlineStatusMessage The message to publish on first connect
 	 * \param offlineStatusMessage The message to publish on disconnect
 	 */
-	void addStatusMessage(const char * statusTopic, const char * onlineStatusMessage, const char * offlineStatusMessage);
+	void addStatusMessage(string_literal statusTopic, string_literal onlineStatusMessage, string_literal offlineStatusMessage);
 
 	/**
 	 * Enables status messages when connected and disconnected from the MQTT broker. This function will set the online- and offline messages
 	 * to the default messages of "online" and "offline". The StatusTopic must be a NULL terminated C-style string. Since only a reference
-	 * to this string is saved, this string must outlive the MQTT object.
+	 * to this string is saved, this string must outlive the MQTT object. The easiest way to do this is to use a string literal.
 	 * 
 	 * \param statusTopic The topic to publish to. 
 	 */
-	void addStatusMessage(const char * statusTopic);
+	void addStatusMessage(string_literal statusTopic);
 
 	/**
 	 * Publishes a payload in a topic. As the payload is in the style of a C-style string, the payload has to be 
@@ -132,6 +135,7 @@ protected:
 	 */
     Mqtt(const char *name, Client &client);
 private:
+
     /**
 	 * Connect to the broker using the initialized hardware interface.
 	 * If connecting to the broker succeeds, this function will return true. If not, it will return false.
@@ -150,11 +154,10 @@ private:
      */
     virtual bool initializeIfNotInitialized() = 0;
 
-private:
     const char *m_name;
-	char *m_statusTopic = nullptr;
-	char *m_onlineStatusMessage = nullptr;
-	char *m_offlineStatusMessage = nullptr;
+	string_literal m_statusTopic{""};
+	string_literal m_onlineStatusMessage{""};
+	string_literal m_offlineStatusMessage{""};
     PubSubClient m_mqttClient;
 };
 
