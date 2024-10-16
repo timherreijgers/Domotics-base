@@ -2,11 +2,8 @@
 #define __MQTT_MESSAGE_PARSER_H__
 
 #include "data/array.h"
-#include "parsing_functions.h"
-#include "utils/compile_time_checks.h"
 
 #include <inttypes.h>
-#include <stdlib.h>
 #include <string.h>
 
 using MessageParserParseFunction = int (*)(const char * str, uint8_t * buffer);
@@ -74,7 +71,7 @@ public:
         strcpy(dataBuffer, data);
 
         auto * buffer = reinterpret_cast<uint8_t *>(&holder);
-        uint8_t index = 0;
+        int index = 0;
         uint8_t arrayIndex = 0;
 
         char * token = strtok(dataBuffer, m_delimiter.data());

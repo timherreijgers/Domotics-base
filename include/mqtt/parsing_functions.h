@@ -24,7 +24,7 @@ template <typename T>
 int addToBuffer(const T & value, uint8_t * buffer)
 {
     memcpy(buffer, &value, sizeof(value));
-    return sizeof(value);
+    return sizeof(T);
 }
 
 } // namespace Internal
@@ -35,7 +35,7 @@ int addToBuffer(const T & value, uint8_t * buffer)
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-int32_t parseUint8(const char * str, uint8_t * buffer);
+int parseUint8(const char * str, uint8_t * buffer);
 
 /**
  * Parses an uint16 from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
@@ -44,7 +44,7 @@ int32_t parseUint8(const char * str, uint8_t * buffer);
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-int32_t parseUint16(const char * str, uint8_t * buffer);
+int parseUint16(const char * str, uint8_t * buffer);
 
 /**
  * Parses an uint32 from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
@@ -53,7 +53,7 @@ int32_t parseUint16(const char * str, uint8_t * buffer);
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-int32_t parseUint32(const char * str, uint8_t * buffer);
+int parseUint32(const char * str, uint8_t * buffer);
 
 /**
  * Parses an int8 from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
@@ -62,7 +62,7 @@ int32_t parseUint32(const char * str, uint8_t * buffer);
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-int32_t parseInt8(const char * str, uint8_t * buffer);
+int parseInt8(const char * str, uint8_t * buffer);
 
 /**
  * Parses an int16 from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
@@ -71,7 +71,7 @@ int32_t parseInt8(const char * str, uint8_t * buffer);
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-int32_t parseInt16(const char * str, uint8_t * buffer);
+int parseInt16(const char * str, uint8_t * buffer);
 
 /**
  * Parses an int32 from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
@@ -80,7 +80,7 @@ int32_t parseInt16(const char * str, uint8_t * buffer);
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-int32_t parseInt32(const char * str, uint8_t * buffer);
+int parseInt32(const char * str, uint8_t * buffer);
 
 /**
  * Parses a float from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
@@ -89,7 +89,7 @@ int32_t parseInt32(const char * str, uint8_t * buffer);
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-int32_t parseFloat(const char * str, uint8_t * buffer);
+int parseFloat(const char * str, uint8_t * buffer);
 
 /**
  * Parses an int from the input string and adds it to the buffer. It returns the amount of bytes added to the buffer
@@ -98,7 +98,7 @@ int32_t parseFloat(const char * str, uint8_t * buffer);
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-inline int32_t parseInt(const char * str, uint8_t * buffer)
+inline int parseInt(const char * str, uint8_t * buffer)
 {
     return parseInt32(str, buffer);
 }
@@ -110,7 +110,7 @@ inline int32_t parseInt(const char * str, uint8_t * buffer)
  * @param buffer The destination buffer
  * @return The amount of bytes written
  */
-inline int32_t parseChar(const char * str, uint8_t * buffer)
+inline int parseChar(const char * str, uint8_t * buffer)
 {
     return parseInt8(str, buffer);
 }
