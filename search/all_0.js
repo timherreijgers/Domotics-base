@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['addstatusmessage_0',['addStatusMessage',['../class_mqtt.html#a89c21b6c5cc3ead214f02f1321ea28cc',1,'Mqtt::addStatusMessage(const char *statusTopic, const char *onlineStatusMessage, const char *offlineStatusMessage)'],['../class_mqtt.html#ab85d4554e4ca19429c142703c166d7c2',1,'Mqtt::addStatusMessage(const char *statusTopic)']]],
+  ['addstatusmessage_0',['addStatusMessage',['../class_mqtt.html#a7ad075963d0bef6b9bef779190caae99',1,'Mqtt::addStatusMessage(Data::string_literal statusTopic, Data::string_literal onlineStatusMessage, Data::string_literal offlineStatusMessage)'],['../class_mqtt.html#a2028a05f7f5f8df56b226442e030a634',1,'Mqtt::addStatusMessage(Data::string_literal statusTopic)']]],
   ['appendstrings_1',['appendStrings',['../namespace_utils.html#ae4ff423f13458224c2f1da1ccd726c08',1,'Utils']]],
   ['appendstringsunsafe_2',['appendStringsUnsafe',['../namespace_utils.html#a19d3ea8f0a9a190e346f610682775bfc',1,'Utils']]],
   ['array_3',['Array',['../class_data_1_1_array.html',1,'Data']]],

@@ -89,10 +89,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8923cb6bb24c788c991e07da1f72c1cc"><td class="memItemLeft" align="right" valign="top"><a id="a8923cb6bb24c788c991e07da1f72c1cc"></a>
 <a class="el" href="class_mqtt.html">Mqtt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="class_mqtt.html">Mqtt</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a8923cb6bb24c788c991e07da1f72c1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89c21b6c5cc3ead214f02f1321ea28cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#a89c21b6c5cc3ead214f02f1321ea28cc">addStatusMessage</a> (const char *statusTopic, const char *onlineStatusMessage, const char *offlineStatusMessage)</td></tr>
-<tr class="separator:a89c21b6c5cc3ead214f02f1321ea28cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab85d4554e4ca19429c142703c166d7c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#ab85d4554e4ca19429c142703c166d7c2">addStatusMessage</a> (const char *statusTopic)</td></tr>
-<tr class="separator:ab85d4554e4ca19429c142703c166d7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ad075963d0bef6b9bef779190caae99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#a7ad075963d0bef6b9bef779190caae99">addStatusMessage</a> (<a class="el" href="class_data_1_1string__literal.html">Data::string_literal</a> statusTopic, <a class="el" href="class_data_1_1string__literal.html">Data::string_literal</a> onlineStatusMessage, <a class="el" href="class_data_1_1string__literal.html">Data::string_literal</a> offlineStatusMessage)</td></tr>
+<tr class="separator:a7ad075963d0bef6b9bef779190caae99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2028a05f7f5f8df56b226442e030a634"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#a2028a05f7f5f8df56b226442e030a634">addStatusMessage</a> (<a class="el" href="class_data_1_1string__literal.html">Data::string_literal</a> statusTopic)</td></tr>
+<tr class="separator:a2028a05f7f5f8df56b226442e030a634"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12415e9ac2da7fc05295c1dcab29ab56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#a12415e9ac2da7fc05295c1dcab29ab56">publishOnTopic</a> (const char *topic, const char *payload, bool retain=false)</td></tr>
 <tr class="separator:a12415e9ac2da7fc05295c1dcab29ab56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf93355dee32608181f4474a759e9773"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mqtt.html#aaf93355dee32608181f4474a759e9773">subscribeToTopic</a> (const char *topic)</td></tr>
@@ -112,7 +112,7 @@ Protected Member Functions</h2></td></tr>
 <p>This class provides the base functionality to enable MQTT communication and contains all logic to do with MQTT. All connection logic is contained within the MqttEthernet and <a class="el" href="class_mqtt_esp8266_wifi.html">MqttEsp8266Wifi</a> classes. One of these classes should be used, depending on the hardware used. To actually send/receive messages, as well as keeping the connection alive, the Mqtt::poll() methods should be called periodically</p>
 <p>To enable more ways to communicate with connection hardware, for example a different ethernet controller, this class can be extended. The hardware abstraction should provide a <a href="https://www.arduino.cc/reference/en/libraries/wifi/">Client</a>. This Client is used as an interface between the hardware and the MQTT middleware. This Client has to be passed to the <a class="el" href="class_mqtt.html#a1561b88787403d956b0c03dea1a38f61">Mqtt::Mqtt(const char *, Client &amp;)</a> constructor. The Client passed to the MQTT middleware <u>CAN NOT</u> go out of scope, as a reference to this object is saved. Besides the constructor, only the <a class="el" href="class_mqtt.html#ad4b9fc0c1a381814e08ccbd9b02d5dee">Mqtt::connect(const IPAddress &amp;)</a>method should be implemented. This method should connect to the broker using the chosen hardware, after which it should call Mqtt::connectToBroker(const IPAddress &amp;)to let the base class establish the actual connection to the broker. </p>
 
-<p class="definition">Definition at line <a class="el" href="mqtt_2mqtt_8h_source.html#l00052">52</a> of file <a class="el" href="mqtt_2mqtt_8h_source.html">mqtt.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mqtt_2mqtt_8h_source.html#l00054">54</a> of file <a class="el" href="mqtt_2mqtt_8h_source.html">mqtt.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1561b88787403d956b0c03dea1a38f61"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1561b88787403d956b0c03dea1a38f61">&#9670;&nbsp;</a></span>Mqtt()</h2>
@@ -160,8 +160,8 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab85d4554e4ca19429c142703c166d7c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab85d4554e4ca19429c142703c166d7c2">&#9670;&nbsp;</a></span>addStatusMessage() <span class="overload">[1/2]</span></h2>
+<a id="a2028a05f7f5f8df56b226442e030a634"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2028a05f7f5f8df56b226442e030a634">&#9670;&nbsp;</a></span>addStatusMessage() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,13 +169,13 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Mqtt::addStatusMessage </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_data_1_1string__literal.html">Data::string_literal</a>&#160;</td>
           <td class="paramname"><em>statusTopic</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Enables status messages when connected and disconnected from the MQTT broker. This function will set the online- and offline messages to the default messages of "online" and "offline". The StatusTopic must be a NULL terminated C-style string. Since only a reference to this string is saved, this string must outlive the MQTT object.</p>
+<p>Enables status messages when connected and disconnected from the MQTT broker. This function will set the online- and offline messages to the default messages of "online" and "offline". The StatusTopic must be a NULL terminated C-style string. Since only a reference to this string is saved, this string must outlive the MQTT object. The easiest way to do this is to use a string literal.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">statusTopic</td><td>The topic to publish to. </td></tr>
@@ -185,8 +185,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a89c21b6c5cc3ead214f02f1321ea28cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89c21b6c5cc3ead214f02f1321ea28cc">&#9670;&nbsp;</a></span>addStatusMessage() <span class="overload">[2/2]</span></h2>
+<a id="a7ad075963d0bef6b9bef779190caae99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ad075963d0bef6b9bef779190caae99">&#9670;&nbsp;</a></span>addStatusMessage() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,19 +194,19 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Mqtt::addStatusMessage </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_data_1_1string__literal.html">Data::string_literal</a>&#160;</td>
           <td class="paramname"><em>statusTopic</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_data_1_1string__literal.html">Data::string_literal</a>&#160;</td>
           <td class="paramname"><em>onlineStatusMessage</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_data_1_1string__literal.html">Data::string_literal</a>&#160;</td>
           <td class="paramname"><em>offlineStatusMessage</em>&#160;</td>
         </tr>
         <tr>
@@ -216,7 +216,7 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Enables status messages when connected and disconnected from the MQTT broker. All strings are C-style strings and must be NULL terminated. Since this function will save a reference to the string the string will have to outlive the MQTT object. The onlineStatusMessage will be automatically published on the next (and all following) connect(s).</p>
+<p>Enables status messages when connected and disconnected from the MQTT broker. All strings are C-style strings and must be NULL terminated. Since this function will save a reference to the string the string will have to outlive the MQTT object. The easiest way to do this is to use a string literal. The onlineStatusMessage will be automatically published on the next (and all following) connect(s).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">statusTopic</td><td>The topic to publish to. </td></tr>
